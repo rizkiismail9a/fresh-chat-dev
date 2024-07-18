@@ -4,7 +4,7 @@ const MainLayout = ({ children }) => {
   return (
     <div
       data-section="signup-wrapper"
-      className="bg-red-400 bg-clip-padding backdrop-filter w-auto backdrop-blur-sm bg-opacity-0"
+      className="bg-red-400 bg-clip-padding backdrop-filter w-auto p-6 rounded-lg backdrop-blur-sm bg-opacity-0"
     >
       {children}
     </div>

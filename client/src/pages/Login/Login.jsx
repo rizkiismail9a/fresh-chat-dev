@@ -2,7 +2,7 @@ const Login = () => {
   return (
     <div
       data-section="login-wrapper"
-      className="flex flex-col gap-8 min-w-96 p-6 rounded-lg leading-normal"
+      className="flex flex-col gap-8 min-w-96 rounded-lg leading-normal"
     >
       <h1 className="text-3xl font-semibold text-center text-gray-300">
         Login <span className="text-blue-400">Fresh Chat</span>
