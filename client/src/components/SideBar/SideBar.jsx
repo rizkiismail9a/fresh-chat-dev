@@ -4,10 +4,10 @@ import SearchInput from "./SearchInput";
 
 const SideBar = () => {
   return (
-    <div className="flex flex-col gap-6 border-r border-slate-500 px-4 h-full">
+    <div className="flex flex-col gap-6 border-r border-slate-500 px-4 py-4 h-full">
       <SearchInput />
       <div className="divider h-1 my-0 py-0" />
-      <div>
+      <div className="h-full overflow-auto">
         <Conversations />
       </div>
 
