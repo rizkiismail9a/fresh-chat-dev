@@ -22,6 +22,7 @@ const SignUp = () => {
               id="fullName"
               placeholder="Enter fullname"
               className="input bg-white-0 glass h-10 text-white"
+              required
             />
           </label>
         </div>
@@ -33,6 +34,7 @@ const SignUp = () => {
               id="username"
               placeholder="Enter username"
               className="input bg-white-0 glass h-10 text-white"
+              required
             />
           </label>
         </div>
@@ -44,6 +46,7 @@ const SignUp = () => {
               id="password"
               placeholder="Enter password"
               className="input bg-white-0 glass h-10 text-white"
+              required
             />
           </label>
         </div>
@@ -57,6 +60,7 @@ const SignUp = () => {
               id="confirmPassword"
               placeholder="Enter password confirmation"
               className="input bg-white-0 glass h-10 text-white"
+              required
             />
           </label>
         </div>

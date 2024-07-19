@@ -19,6 +19,7 @@ const Login = () => {
               id="username"
               placeholder="Enter username"
               className="input bg-white-0 glass h-10 text-white"
+              required
             />
           </label>
         </div>
@@ -30,6 +31,7 @@ const Login = () => {
               id="password"
               placeholder="Enter password"
               className="input bg-white-0 glass h-10 text-white"
+              required
             />
           </label>
         </div>
