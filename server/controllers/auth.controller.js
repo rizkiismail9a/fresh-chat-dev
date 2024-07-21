@@ -119,7 +119,6 @@ const signUp = async (req, res) => {
 const refreshToken = async (req, res) => {
   try {
     const { _id } = req.body; // The id of logged in user
-    console.log(req);
 
     if (!_id)
       return res
