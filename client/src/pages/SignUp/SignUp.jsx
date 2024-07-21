@@ -1,7 +1,35 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import useSignUp from "../../hooks/useSignup";
 import GenderCheckbox from "./GenderCheckbox";
 
 const SignUp = () => {
+  const { register } = useSignUp();
+
+  const [signUpData, setSignUpData] = useState({
+    username: "",
+    fullName: "",
+    password: "",
+    confirmPassword: "",
+    gender: "",
+  });
+
+  const [errorMsgVisibility, setErrorMsgVisibility] = useState(false);
+
+  const submitData = async (e) => {
+    e.preventDefault();
+    if (signUpData.gender === "") {
+      setErrorMsgVisibility(true);
+    }
+    await register(signUpData);
+  };
+
+  // Handle checkbox changes
+  const handleChange = (e) => {
+    setErrorMsgVisibility(false);
+    setSignUpData(() => ({ ...signUpData, gender: e }));
+  };
+
   return (
     <div
       data-section="signup-wrapper"
@@ -11,7 +39,7 @@ const SignUp = () => {
         Sign Up <span className="text-blue-400">Fresh Chat</span>
       </h1>
 
-      <form className="flex flex-col gap-1">
+      <form onSubmit={submitData} className="flex flex-col gap-1">
         <div>
           <label className="label">
             <span className="text-base label-text text-gray-100">
@@ -23,6 +51,10 @@ const SignUp = () => {
               placeholder="Enter fullname"
               className="input bg-white-0 glass h-10 text-white"
               required
+              value={signUpData.fullName}
+              onChange={(e) =>
+                setSignUpData({ ...signUpData, fullName: e.target.value })
+              }
             />
           </label>
         </div>
@@ -35,6 +67,10 @@ const SignUp = () => {
               placeholder="Enter username"
               className="input bg-white-0 glass h-10 text-white"
               required
+              value={signUpData.username}
+              onChange={(e) =>
+                setSignUpData({ ...signUpData, username: e.target.value })
+              }
             />
           </label>
         </div>
@@ -47,6 +83,10 @@ const SignUp = () => {
               placeholder="Enter password"
               className="input bg-white-0 glass h-10 text-white"
               required
+              value={signUpData.password}
+              onChange={(e) =>
+                setSignUpData({ ...signUpData, password: e.target.value })
+              }
             />
           </label>
         </div>
@@ -61,10 +101,23 @@ const SignUp = () => {
               placeholder="Enter password confirmation"
               className="input bg-white-0 glass h-10 text-white"
               required
+              value={signUpData.confirmPassword}
+              onChange={(e) =>
+                setSignUpData({
+                  ...signUpData,
+                  confirmPassword: e.target.value,
+                })
+              }
             />
           </label>
         </div>
-        <GenderCheckbox />
+        <GenderCheckbox
+          onChange={handleChange}
+          selectedValue={signUpData.gender}
+        />
+        {errorMsgVisibility && (
+          <p className="text-red-600 text-sm">Please, select a gender</p>
+        )}
         <div>
           <Link
             to="/login"

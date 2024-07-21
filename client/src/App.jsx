@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./Layout/MainLayout";
 import Home from "./pages/Home/Home";
@@ -7,6 +8,7 @@ import SignUp from "./pages/SignUp/SignUp";
 function App() {
   return (
     <div className="p-4 flex items-center justify-center h-screen">
+      <Toaster />
       <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />

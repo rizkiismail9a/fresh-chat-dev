@@ -4,7 +4,7 @@ const GenderCheckbox = ({ onChange, selectedValue }) => {
       label: "Male",
       value: "male",
     },
-    { label: "Female", value: "famale" },
+    { label: "Female", value: "female" },
   ];
 
   return (
