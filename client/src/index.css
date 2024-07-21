@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 /* doesn't work. Why? */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 8px;
 }
 
@@ -20,13 +20,16 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #242424;
-}
+} */
 
 /* General Styles */
 * {
   font-family: "Exo 2", sans-serif;
   line-height: 1.5rem !important;
   letter-spacing: 0.24px;
+  scrollbar-width: thin;
+  scrollbar-color: gray;
+  scrollbar-arrow-color: green;
 }
 
 body {
