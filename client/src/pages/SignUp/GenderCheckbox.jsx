@@ -1,14 +1,47 @@
-const GenderCheckbox = () => {
+const GenderCheckbox = ({ onChange, selectedValue }) => {
+  const genderOptions = [
+    {
+      label: "Male",
+      value: "male",
+    },
+    { label: "Female", value: "famale" },
+  ];
+
   return (
     <div className="flex gap-3">
-      <label className="label justify-normal gap-2 cursor-pointer">
-        <span className="text-gray-100">Male</span>
-        <input type="checkbox" className="checkbox" required />
-      </label>
-      <label className="label justify-normal gap-2 cursor-pointer">
+      {genderOptions.map((option) => {
+        return (
+          <label
+            key={option.value}
+            className={`label justify-normal gap-2 cursor-pointer ${
+              selectedValue === option.value ? "selected" : ""
+            }`}
+          >
+            <span className="text-gray-100">{option.label}</span>
+            <input
+              type="checkbox"
+              name="gender"
+              className="checkbox"
+              checked={selectedValue === option.value}
+              onChange={() => onChange(option.value)}
+            />
+          </label>
+        );
+      })}
+      {/* <label
+        className={`label justify-normal gap-2 cursor-pointer ${
+          selectedValue === "female" ? "selected" : ""
+        }`}
+      >
         <span className="text-gray-100">Female</span>
-        <input type="checkbox" className="checkbox" required />
-      </label>
+        <input
+          type="checkbox"
+          name="gender"
+          className="checkbox"
+          checked={selectedValue === "female"}
+          onChange={() => onChange("female")}
+        />
+      </label> */}
     </div>
   );
 };
