@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { useRef } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -24,6 +25,7 @@ const Login = () => {
       });
       setAuthedUser(data.data);
       localStorage.setItem("user", JSON.stringify(data.data));
+      Cookies.set("token", data.token);
       toast.success("Login success");
     } catch (error) {
       console.error("login error", error);

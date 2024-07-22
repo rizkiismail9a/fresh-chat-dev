@@ -23,10 +23,11 @@ const login = async (req, res) => {
         .json({ status: 403, message: "Incorrect password or username" });
 
     // If username and password valid, generate new token
-    generateTokenandCookie(user._id, res);
+    const token = generateTokenandCookie(user._id, res);
     return res.status(200).json({
       status: 200,
       message: "Login success",
+      token,
       data: {
         _id: user._id,
         fullName: user.fullName,
@@ -97,11 +98,12 @@ const signUp = async (req, res) => {
 
     await newUser.save();
 
-    generateTokenandCookie(String(newUser._id), res);
+    const token = generateTokenandCookie(String(newUser._id), res);
 
     return res.status(201).json({
       message: "Sign Up Success",
       status: 201,
+      token,
       user: {
         _id: newUser._id,
         fullName,
@@ -125,9 +127,11 @@ const refreshToken = async (req, res) => {
         .status(400)
         .json({ status: 400, message: "Invalid payload data" });
 
-    generateTokenandCookie(_id, res);
+    const token = generateTokenandCookie(_id, res);
 
-    return res.status(200).json({ status: 200, message: "Login success" });
+    return res
+      .status(200)
+      .json({ status: 200, message: "Login success", token });
   } catch (error) {
     console.error("error refresh token", error);
     return res.status(500).json({ message: "Internal server error" });
