@@ -1,6 +1,36 @@
+import { useRef } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../../context/auth.context";
+import AuthenticationServices from "../../services/auth.services";
 
 const Login = () => {
+  const { setAuthedUser } = useAuthContext();
+  const username = useRef("");
+  const password = useRef("");
+
+  /*
+   * Login function run when user click login button
+   * after that, user data will saved in localstorage and the global state will be updated
+   *
+   */
+
+  const login = async (e) => {
+    try {
+      e.preventDefault();
+      const { data } = await AuthenticationServices.login({
+        username: username.current.value,
+        password: password.current.value,
+      });
+      setAuthedUser(data.data);
+      localStorage.setItem("user", JSON.stringify(data.data));
+      toast.success("Login success");
+    } catch (error) {
+      console.error("login error", error);
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
     <div
       data-section="login-wrapper"
@@ -10,7 +40,7 @@ const Login = () => {
         Login <span className="text-blue-400">Fresh Chat</span>
       </h1>
 
-      <form className="flex flex-col gap-1">
+      <form onSubmit={login} className="flex flex-col gap-1">
         <div>
           <label className="label">
             <span className="text-base label-text text-gray-100">Username</span>
@@ -20,6 +50,7 @@ const Login = () => {
               placeholder="Enter username"
               className="input bg-white-0 glass h-10 text-white"
               required
+              ref={username}
             />
           </label>
         </div>
@@ -32,6 +63,7 @@ const Login = () => {
               placeholder="Enter password"
               className="input bg-white-0 glass h-10 text-white"
               required
+              ref={password}
             />
           </label>
         </div>

@@ -7,6 +7,10 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || {}
   );
 
+  // Use memo to avoid unwanted rerender
+  /*
+   * Since memo will only be triggered when the depedencies are changed
+   */
   const value = useMemo(
     () => ({ authedUser, setAuthedUser }),
     [authedUser, setAuthedUser]

@@ -20,6 +20,9 @@ const AuthenticationServices = {
   logout: () => {
     return API().post("/auth/logout");
   },
+  login: ({ username, password }) => {
+    return API().post("/auth/login", { username, password });
+  },
 };
 
 export default AuthenticationServices;

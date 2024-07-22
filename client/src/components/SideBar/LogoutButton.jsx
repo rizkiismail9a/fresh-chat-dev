@@ -1,6 +1,5 @@
 import toast from "react-hot-toast";
 import { BiLogOut } from "react-icons/bi";
-
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/auth.context";
 import AuthenticationServices from "../../services/auth.services";
