@@ -10,22 +10,26 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || {}
   );
 
+  const clearStorage = () => {
+    setAuthedUser({});
+    localStorage.clear();
+  };
+
   /*
    * Login again everytime user refresh the page
    */
-
   const refresh = async () => {
     try {
       if (authedUser._id) {
         const { data } = await AuthenticationServices.refresh(authedUser._id);
         Cookies.set("token", data.token);
       } else {
-        setAuthedUser({});
-        localStorage.clear();
+        clearStorage();
       }
     } catch (error) {
       console.error("error refresh", error);
       toast.error("Session end");
+      clearStorage();
     }
   };
 
