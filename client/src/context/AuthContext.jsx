@@ -28,7 +28,7 @@ export const AuthContextProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("error refresh", error);
-      toast.error("Session end");
+      toast.error("The session is over");
       clearStorage();
     }
   };
