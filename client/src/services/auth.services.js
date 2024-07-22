@@ -17,6 +17,9 @@ const AuthenticationServices = {
   registerUser: (body) => {
     return API().post("/auth/signup", body);
   },
+  logout: () => {
+    return API().post("/auth/logout");
+  },
 };
 
 export default AuthenticationServices;
