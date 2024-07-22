@@ -1,4 +1,4 @@
-const Conversation = () => {
+const Conversation = ({ name, picture }) => {
   return (
     <>
       <div
@@ -7,14 +7,11 @@ const Conversation = () => {
       >
         <div className="avatar online">
           <div className="w-10 rounded-full">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
-              alt="user avatar"
-            />
+            <img src={picture} alt={name} />
           </div>
         </div>
         <div className="text-gray-100 text-sm leading-normal">
-          <span>Laksmi Mentari</span>
+          <span>{name}</span>
         </div>
       </div>
       <div className="divider h-1 my-0 py-0" />
