@@ -17,7 +17,7 @@ const SearchInput = ({ onChange }) => {
         placeholder="Find someone"
         ref={searchQuery}
       />
-      <button className="btn btn-circle btn-warning">
+      <button className="btn btn-circle bg-orange-500 border-none hover:bg-orange-600">
         <IoSearchSharp className="text-white" />
       </button>
     </form>

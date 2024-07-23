@@ -14,8 +14,8 @@ const Conversation = ({ conversation, isLastIndex }) => {
       <button
         data-section="container"
         onClick={() => setSelectedConversation(conversation)}
-        className={`flex gap-2 w-full items-center px-2 py-1 bg-clip-padding hover:bg-yellow-500 hover:bg-opacity-60 cursor-pointer ${
-          selectedConversation?._id === conversation._id ? "bg-yellow-500" : ""
+        className={`flex gap-2 w-full items-center px-2 py-1 bg-clip-padding hover:bg-orange-500 hover:bg-opacity-60 cursor-pointer ${
+          selectedConversation?._id === conversation._id ? "bg-orange-500" : ""
         }`}
       >
         <div className="avatar online">
