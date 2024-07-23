@@ -2,11 +2,11 @@ import useConversationStore from "../../stores/conversation.store";
 
 const Conversation = ({ conversation, isLastIndex }) => {
   const selectedConversation = useConversationStore(
-    (state) => state.selectedConversation
+    (state) => state?.selectedConversation
   );
 
   const setSelectedConversation = useConversationStore(
-    (state) => state.setSelectedConversation
+    (state) => state?.setSelectedConversation
   );
 
   return (

@@ -1,19 +1,22 @@
 import { TiMessages } from "react-icons/ti";
 import { useAuthContext } from "../../context/auth.context";
+import useGetMessages from "../../hooks/useGetMessages";
 import useConversationStore from "../../stores/conversation.store";
+import MessageSkeleton from "../Skeleton/ConversationSkeleton";
 import MessageInput from "./MessageInput";
 import Messages from "./Messages";
 
 const MessageContainer = () => {
   const { selectedConversation } = useConversationStore();
   const noChatSelected = selectedConversation === null;
+  const { messages, loading } = useGetMessages();
 
   return (
-    <div className="md:min-w-[450px] flex flex-col w-[700px]">
+    <div className="md:min-w-[450px] h-full w-[700px]">
       {noChatSelected ? (
         <NoChatSelected />
       ) : (
-        <>
+        <div className="h-full flex flex-col">
           <div
             data-section="header"
             className="bg-slate-400 px-4 py-2 mb-2 sticky top-0"
@@ -23,9 +26,13 @@ const MessageContainer = () => {
             </span>
           </div>
 
-          <Messages />
-          <MessageInput />
-        </>
+          {!loading && <Messages messages={messages} />}
+          {loading && <MessageSkeleton />}
+
+          <div className="sticky bottom-0">
+            <MessageInput />
+          </div>
+        </div>
       )}
     </div>
   );

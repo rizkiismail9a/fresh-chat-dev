@@ -8,10 +8,10 @@ import { create } from "zustand";
 const useConversationStore = create((set) => {
   return {
     selectedConversation: null,
-    setSelectedConversation: (conv) =>
-      set(() => ({ selectedConversation: conv })),
+    setSelectedConversation: (selectedConversation) =>
+      set({ selectedConversation }),
     messages: [],
-    setMessages: (messages) => set(messages),
+    setMessages: (messages) => set({ messages }),
   };
 });
 

@@ -1,12 +1,11 @@
 import Message from "./Message";
 
-const Messages = () => {
+const Messages = ({ messages }) => {
   return (
     <div className="p-4 flex-1 overflow-auto">
-      <Message />
-      <Message />
-      <Message />
-      <Message />
+      {messages?.map((item) => (
+        <Message message={item} key={item._id} />
+      ))}
     </div>
   );
 };
