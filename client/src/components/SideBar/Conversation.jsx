@@ -9,8 +9,6 @@ const Conversation = ({ conversation, isLastIndex }) => {
     (state) => state.setSelectedConversation
   );
 
-  console.log(selectedConversation);
-
   return (
     <>
       <button

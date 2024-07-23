@@ -1,12 +1,22 @@
+import { useRef } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 
-const SearchInput = () => {
+const SearchInput = ({ onChange }) => {
+  const searchQuery = useRef("");
+
+  const submit = (e) => {
+    e.preventDefault();
+    console.log(searchQuery.current.value);
+    onChange(searchQuery.current.value);
+  };
+
   return (
-    <form className="flex gap-2 items-center">
+    <form onSubmit={submit} className="flex gap-2 items-center">
       <input
         className="input rounded-md bg-transparent glass text-gray-50"
         type="text"
         placeholder="Find someone"
+        ref={searchQuery}
       />
       <button className="btn btn-circle btn-warning">
         <IoSearchSharp className="text-white" />

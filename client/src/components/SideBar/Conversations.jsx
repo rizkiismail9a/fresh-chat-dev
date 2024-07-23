@@ -1,8 +1,8 @@
 import useGetConversations from "../../hooks/useGetConversation";
 import Conversation from "./Conversation";
 
-const Conversations = () => {
-  const { conversations } = useGetConversations();
+const Conversations = ({ searchQuery }) => {
+  const { conversations } = useGetConversations(searchQuery);
 
   return (
     <div>

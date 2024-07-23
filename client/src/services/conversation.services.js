@@ -1,8 +1,9 @@
 import { API } from "../utils/api.utils";
 
 const ConversationsServices = {
-  getConversations: () => {
-    return API().get("/users/conversations");
+  getConversationsData: (params = undefined) => {
+    console.log(params);
+    return API({ params }).get("/users/conversations");
   },
 };
 

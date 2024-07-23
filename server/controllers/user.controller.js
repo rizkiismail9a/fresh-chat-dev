@@ -21,11 +21,26 @@ const getAllUsers = async (req, res) => {
 const getUserWithChat = async (req, res) => {
   try {
     const loggedUserId = req.userId;
+    const search = req.query.search;
 
-    // Find the conversation where the logged users have chated with
     const conversations = await Conversation.find({
       participants: { $in: [loggedUserId] },
     }).populate("participants");
+
+    if (search) {
+      const users = await User.find({
+        fullName: { $regex: new RegExp(search, "i") },
+      });
+
+      const userArr = Array.from(users);
+
+      return res.status(200).json({
+        status: 200,
+        data: {
+          users: userArr,
+        },
+      });
+    }
 
     // Extract the participants from the conversations
     if (conversations.length) {
