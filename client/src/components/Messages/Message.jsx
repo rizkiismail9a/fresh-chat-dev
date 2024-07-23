@@ -18,19 +18,17 @@ const Message = ({ message }) => {
             <img src={profileImg} alt="user avatar" />
           </div>
         </div>
-        <div className="flex flex-col gap-2">
-          <div>
-            <div
-              className={`chat-bubble text-gray-50 ${
-                isFromMe ? "bg-sky-500" : "bg-orange-500"
-              }`}
-            >
-              {message.message}
-            </div>
-            <div className="chat-footer text-gray-50">
-              {formatDate(message.createdAt)}
-            </div>
+        <div className="flex flex-col items-end">
+          <div
+            className={`chat-bubble text-gray-50 ${
+              isFromMe ? "bg-sky-500" : "bg-orange-500"
+            }`}
+          >
+            {message.message}
           </div>
+        </div>
+        <div className="chat-footer text-xs text-gray-50">
+          {formatDate(message.createdAt)}
         </div>
       </div>
     </>

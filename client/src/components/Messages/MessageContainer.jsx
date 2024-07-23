@@ -9,7 +9,7 @@ import Messages from "./Messages";
 const MessageContainer = () => {
   const { selectedConversation } = useConversationStore();
   const noChatSelected = selectedConversation === null;
-  const { messages, loading } = useGetMessages();
+  const { loading } = useGetMessages();
 
   return (
     <div className="md:min-w-[450px] h-full w-[700px]">
@@ -26,7 +26,7 @@ const MessageContainer = () => {
             </span>
           </div>
 
-          {!loading && <Messages messages={messages} />}
+          {!loading && <Messages />}
           {loading && <MessageSkeleton />}
 
           <div className="sticky bottom-0">
