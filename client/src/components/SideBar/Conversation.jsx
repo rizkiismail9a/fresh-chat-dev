@@ -1,20 +1,35 @@
-const Conversation = ({ name, picture }) => {
+import useConversationStore from "../../stores/conversation.store";
+
+const Conversation = ({ conversation, isLastIndex }) => {
+  const selectedConversation = useConversationStore(
+    (state) => state.selectedConversation
+  );
+
+  const setSelectedConversation = useConversationStore(
+    (state) => state.setSelectedConversation
+  );
+
+  console.log(selectedConversation);
+
   return (
     <>
-      <div
+      <button
         data-section="container"
-        className="flex gap-2 items-center px-2 py-1 bg-clip-padding hover:bg-yellow-500 hover:bg-opacity-60 cursor-pointer"
+        onClick={() => setSelectedConversation(conversation)}
+        className={`flex gap-2 w-full items-center px-2 py-1 bg-clip-padding hover:bg-yellow-500 hover:bg-opacity-60 cursor-pointer ${
+          selectedConversation?._id === conversation._id ? "bg-yellow-500" : ""
+        }`}
       >
         <div className="avatar online">
           <div className="w-10 rounded-full">
-            <img src={picture} alt={name} />
+            <img src={conversation.profileImg} alt={conversation.fullName} />
           </div>
         </div>
         <div className="text-gray-100 text-sm leading-normal">
-          <span>{name}</span>
+          <span>{conversation.fullName}</span>
         </div>
-      </div>
-      <div className="divider h-1 my-0 py-0" />
+      </button>
+      {!isLastIndex && <div className="divider h-1 my-0 py-0" />}
     </>
   );
 };

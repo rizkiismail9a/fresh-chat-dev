@@ -1,35 +1,17 @@
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import ConversationsServices from "../../services/conversation.services";
+import useGetConversations from "../../hooks/useGetConversation";
 import Conversation from "./Conversation";
 
 const Conversations = () => {
-  const [conversations, setConversations] = useState();
-
-  useEffect(() => {
-    getConversations();
-  }, []);
-
-  // Get list of conversations
-  const getConversations = async () => {
-    try {
-      const { data } = await ConversationsServices.getConversations();
-
-      setConversations(data.data.users);
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to get conversation list");
-    }
-  };
+  const { conversations } = useGetConversations();
 
   return (
     <div>
-      {conversations?.map((conv) => {
+      {conversations?.map((conv, index) => {
         return (
           <Conversation
-            name={conv.fullName}
-            picture={conv.profileImg}
+            conversation={conv}
             key={conv._id}
+            isLastIndex={index === conversations.length - 1}
           />
         );
       })}
