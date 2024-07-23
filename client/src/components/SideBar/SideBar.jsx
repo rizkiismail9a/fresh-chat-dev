@@ -7,7 +7,6 @@ const SideBar = () => {
   const [searchQuery, setSearchQuery] = useState();
 
   const typeSearchQuery = (query) => {
-    console.log("query", query);
     setSearchQuery(query);
   };
 

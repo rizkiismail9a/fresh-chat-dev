@@ -6,7 +6,6 @@ const SearchInput = ({ onChange }) => {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log(searchQuery.current.value);
     onChange(searchQuery.current.value);
   };
 
