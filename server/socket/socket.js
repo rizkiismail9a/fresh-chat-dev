@@ -19,8 +19,6 @@ socket.on("connection", (socket) => {
   const userId = socket.handshake.query.userId;
   if (userId !== "undefined") socketOptions[userId] = socket.id;
 
-  console.log(socketOptions);
-
   /*
    * After assign the socket.id to the key of userId,
    * send it to every connected user with emit
