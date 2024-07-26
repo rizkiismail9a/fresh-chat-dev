@@ -22,7 +22,7 @@ const MessageInput = () => {
           placeholder="Send a message"
           value={newMessage}
           className="border text-sm rounded-lg focus:outline-none block w-full p-2.5 bg-gray-700 border-gray-600 text-white"
-          onChange={(e) => setNewMessage(e.target.value.trim())}
+          onChange={(e) => setNewMessage(e.target.value)}
           autoComplete="off"
         />
         <button

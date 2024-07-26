@@ -16,7 +16,7 @@ const Messages = () => {
 
   return (
     <div className="p-4 flex-1 flex flex-col gap-2 overflow-auto">
-      {messages.length &&
+      {messages &&
         messages?.map((item) => (
           <div key={item._id} ref={lastMessageRef}>
             {/* Ref can only be refered into one DOM element at one time, thus the looping will overwritten the ref props and end up with the last one */}

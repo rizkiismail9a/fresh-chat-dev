@@ -84,9 +84,7 @@ const signUp = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create a placeholder for the avatar
-    const profileImg =
-      process.env.AVATAR_PLACEHOLDER_API +
-      `${gender === "male" ? "/boy" : "/girl"}`;
+    const profileImg = `${gender === "male" ? "/boy.webp" : "/girl.webp"}`;
 
     const newUser = new User({
       fullName,

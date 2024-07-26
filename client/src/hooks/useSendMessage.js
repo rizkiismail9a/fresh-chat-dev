@@ -16,10 +16,16 @@ const useSendMessage = () => {
         newMessage
       );
 
-      if (data.data.message) setMessages([...messages, data.data]);
+      if (data.data.message) {
+        if (messages) {
+          setMessages([...messages, data.data]);
+        } else {
+          setMessages([data.data]);
+        }
+      }
     } catch (error) {
       console.error("error send message", error);
-      toast.error(error.response.data.message);
+      if (error.response) toast.error(error.response.data.message);
     } finally {
       setLoading(false);
     }

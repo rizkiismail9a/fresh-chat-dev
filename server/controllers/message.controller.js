@@ -51,7 +51,7 @@ const sendMessage = async (req, res) => {
     if (recieverSokcetId) {
       socket
         .to(recieverSokcetId)
-        .emit("newMessage", { status: 201, data: newMessage });
+        .emit("newMessage", { status: 201, data: newMessage, senderId });
     }
 
     return res.status(201).json({ status: 201, data: newMessage });
