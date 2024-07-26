@@ -10,7 +10,6 @@ const useListenMessages = () => {
 
   useEffect(() => {
     socket?.on("newMessage", (dataEmit) => {
-      // dataEmit.shouldShake = true;
       const newMessages = dataEmit?.data;
       const senderId = dataEmit.senderId;
 
@@ -22,6 +21,8 @@ const useListenMessages = () => {
         }
       }
     });
+
+    // Remove the event listener
     return () => socket?.off("newMessage");
   }, [socket, messages, setMessages, selectedConversation]);
 };
