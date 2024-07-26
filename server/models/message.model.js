@@ -7,7 +7,7 @@ const messageSchema = new Schema(
       ref: "User", // The reference of the senderId is id from user collection
       required: true,
     },
-    recieverId: {
+    receiverId: {
       type: Schema.Types.ObjectId, // This field contain mongoDB id
       ref: "User", // The reference of the senderId is id from user collection
       required: true,

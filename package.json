@@ -5,7 +5,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon ./server/server.js"
+    "start:dev": "nodemon ./server/server.js",
+    "start": "node ./server/server.js",
+    "build": "npm install && npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "rizkiismail9a",
@@ -19,6 +21,8 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.1",
+    "react-icons": "^5.2.1",
+    "react-router-dom": "^6.25.1",
     "socket.io": "^4.7.5"
   },
   "devDependencies": {

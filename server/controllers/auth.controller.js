@@ -23,11 +23,12 @@ const login = async (req, res) => {
         .json({ status: 403, message: "Incorrect password or username" });
 
     // If username and password valid, generate new token
-    generateTokenandCookie(user._id, res);
+    const token = generateTokenandCookie(user._id, res);
     return res.status(200).json({
       status: 200,
       message: "Login success",
       data: {
+        token,
         _id: user._id,
         fullName: user.fullName,
         username: user.username,
@@ -83,9 +84,7 @@ const signUp = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create a placeholder for the avatar
-    const profileImg =
-      process.env.AVATAR_PLACEHOLDER_API +
-      `${gender === "male" ? "/boy" : "/girl"}`;
+    const profileImg = `${gender === "male" ? "/boy.webp" : "/girl.webp"}`;
 
     const newUser = new User({
       fullName,
@@ -97,12 +96,13 @@ const signUp = async (req, res) => {
 
     await newUser.save();
 
-    generateTokenandCookie(String(newUser._id), res);
+    const token = generateTokenandCookie(String(newUser._id), res);
 
     return res.status(201).json({
       message: "Sign Up Success",
       status: 201,
       user: {
+        token,
         _id: newUser._id,
         fullName,
         gender,
@@ -119,16 +119,17 @@ const signUp = async (req, res) => {
 const refreshToken = async (req, res) => {
   try {
     const { _id } = req.body; // The id of logged in user
-    console.log(req);
 
     if (!_id)
       return res
         .status(400)
         .json({ status: 400, message: "Invalid payload data" });
 
-    generateTokenandCookie(_id, res);
+    const token = generateTokenandCookie(_id, res);
 
-    return res.status(200).json({ status: 200, message: "Login success" });
+    return res
+      .status(200)
+      .json({ status: 200, message: "Login success", token });
   } catch (error) {
     console.error("error refresh token", error);
     return res.status(500).json({ message: "Internal server error" });

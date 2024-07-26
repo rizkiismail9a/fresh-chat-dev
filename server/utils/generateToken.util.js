@@ -6,9 +6,11 @@ export const generateTokenandCookie = (userId, res) => {
   });
 
   res.cookie("token", token, {
-    maxAge: 24 * 60 * 60 * 1000, // I day only
+    maxAge: 60 * 60 * 24 * 1000, // One day only
     httpOnly: true, // Prevent the cookie to be accessed by Javascript (XSS)
     sameSite: "strict", //Prevent the CSRF (cross-site request forgery) attack
     secure: process.env.DEV_ENV !== "development",
   });
+
+  return token;
 };
