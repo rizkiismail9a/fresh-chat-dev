@@ -7,10 +7,10 @@ import corsOption from "./config/cors.config.js";
 import connectToDB from "./db/connect.db.js";
 import credentials from "./middlewares/credentials.middleware.js";
 import { authRoutes, messageRoutes, userRoutes } from "./routes/index.js";
+import { app, server } from "./socket/socket.js";
 
 dotenv.config();
 
-const app = express();
 const port = process.env.PORT;
 
 // Middleware
@@ -22,7 +22,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 
-app.listen(port, () => {
+server.listen(port, () => {
   connectToDB();
   console.log("Aplikasi berjalan");
 });

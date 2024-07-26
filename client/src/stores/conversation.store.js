@@ -12,6 +12,8 @@ const useConversationStore = create((set) => {
       set({ selectedConversation }),
     messages: [],
     setMessages: (messages) => set({ messages }),
+    loading: false,
+    setLoading: (isLoading) => set({ loading: isLoading }),
   };
 });
 
