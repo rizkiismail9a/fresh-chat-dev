@@ -27,8 +27,8 @@ const login = async (req, res) => {
     return res.status(200).json({
       status: 200,
       message: "Login success",
-      token,
       data: {
+        token,
         _id: user._id,
         fullName: user.fullName,
         username: user.username,
@@ -101,8 +101,8 @@ const signUp = async (req, res) => {
     return res.status(201).json({
       message: "Sign Up Success",
       status: 201,
-      token,
       user: {
+        token,
         _id: newUser._id,
         fullName,
         gender,

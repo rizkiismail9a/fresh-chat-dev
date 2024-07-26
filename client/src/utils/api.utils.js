@@ -1,13 +1,12 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 
 const API = ({ headers = {}, params = {} } = {}) => {
-  const token = Cookies.get("token");
+  // const token = Cookies.get("token");
   const instanse = axios.create({
     baseURL: import.meta.env.VITE_BASE_URI + "/api",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      // Authorization: `Bearer ${token}`,
       ...headers,
     },
     params,
