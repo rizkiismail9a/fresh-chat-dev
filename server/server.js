@@ -30,6 +30,8 @@ app.use(express.static(path.join(__dirname, "/client/dist")));
 /*
  * Since the client and the server is in the same root, when the server run,
  * we want to run the client side too
+ * So, now, the client side is no longer run in the localhost:5000,
+ * but it's staticly imported in the backend
  *
  */
 

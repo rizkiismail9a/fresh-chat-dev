@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const socket = new Server(server, {
   cors: {
-    origin: ["http://localhost:5000"],
+    origin: ["http://localhost:5000"], //Port client
     methods: ["GET", "POST"],
   },
 });

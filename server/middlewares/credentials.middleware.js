@@ -1,4 +1,8 @@
-const allowedOrigin = ["http://localhost:5000", "http://localhost:8000"];
+const allowedOrigin = [
+  "http://localhost:5000",
+  "http://localhost:8000",
+  "https://dev-fresh-chat.my.id",
+];
 
 const credentials = (req, res, next) => {
   const origin = req.headers.origin;
