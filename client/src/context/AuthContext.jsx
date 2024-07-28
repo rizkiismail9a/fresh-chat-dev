@@ -22,7 +22,7 @@ export const AuthContextProvider = ({ children }) => {
     try {
       if (authedUser._id) {
         const { data } = await AuthenticationServices.refresh(authedUser._id);
-        Cookies.set("token", data.token);
+        Cookies.set("token", data.token, { expires: 1 });
       } else {
         clearStorage();
       }
@@ -44,7 +44,6 @@ export const AuthContextProvider = ({ children }) => {
    */
   const value = useMemo(
     () => ({ authedUser, setAuthedUser }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [authedUser, setAuthedUser]
   );
 
