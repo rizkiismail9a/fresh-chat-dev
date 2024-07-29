@@ -25,7 +25,7 @@ const Login = () => {
       });
       setAuthedUser(data.data);
       localStorage.setItem("user", JSON.stringify(data.data));
-      Cookies.set("token", data.token);
+      Cookies.set("token", data.data.token, { expires: 1 });
       toast.success("Login success");
     } catch (error) {
       console.error("login error", error);

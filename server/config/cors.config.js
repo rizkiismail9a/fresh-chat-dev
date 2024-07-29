@@ -1,4 +1,8 @@
-const allowedOrigin = ["http://localhost:5000", "http://localhost:8000"];
+const allowedOrigin = [
+  "http://localhost:5000",
+  "http://localhost:8000",
+  "https://dev-fresh-chat.my.id",
+];
 const corsOption = {
   origin: (origin, callback) => {
     if (allowedOrigin.includes(origin) || !origin) {
