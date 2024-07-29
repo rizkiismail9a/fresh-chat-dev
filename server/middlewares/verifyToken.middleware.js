@@ -2,8 +2,7 @@ import jwt from "jsonwebtoken";
 
 export const verifyToken = (req, res, next) => {
   try {
-    const authHeader = req.headers.authorization || req.headers.Authorization;
-    const token = authHeader.split(" ")[1];
+    const token = req.cookies.token;
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
