@@ -11,7 +11,7 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (authedUser._id) {
-      const socket = io(import.meta.env.VITE_BASE_URI, {
+      const socket = io("https://fresh-chat-dev.vercel.app", {
         query: {
           userId: authedUser._id,
         },
