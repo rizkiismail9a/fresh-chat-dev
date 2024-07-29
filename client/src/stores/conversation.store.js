@@ -14,6 +14,8 @@ const useConversationStore = create((set) => {
     setMessages: (messages) => set({ messages }),
     loading: false,
     setLoading: (isLoading) => set({ loading: isLoading }),
+    showSidebar: true,
+    setShowSidebar: (isSideBarShown) => set({ showSidebar: isSideBarShown }),
   };
 });
 

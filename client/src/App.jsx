@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Toaster } from "react-hot-toast";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import NavBar from "./components/NavBar/NavBar";
 import { AuthContext } from "./context/AuthContext";
 import Loading from "./Layout/Loading";
 import MainLayout from "./Layout/MainLayout";
@@ -12,24 +13,27 @@ import useConversationStore from "./stores/conversation.store";
 function App() {
   const { authedUser } = useContext(AuthContext);
   const { loading } = useConversationStore();
+  const { pathname } = useLocation();
 
   return (
-    <div className="p-4 flex items-center justify-center h-screen">
+    <div className="p-4 flex flex-col gap-3 items-center justify-center h-screen">
       <Toaster />
       {loading && <Loading />}
+      {pathname === "/home" && <NavBar />}
       <MainLayout>
         <Routes>
           <Route
-            path="/"
+            exact
+            path="/home"
             element={!authedUser._id ? <Navigate to={"/login"} /> : <Home />}
           />
           <Route
             path="/login"
-            element={authedUser._id ? <Navigate to={"/"} /> : <Login />}
+            element={authedUser._id ? <Navigate to={"/home"} /> : <Login />}
           />
           <Route
             path="/signup"
-            element={authedUser._id ? <Navigate to={"/"} /> : <SignUp />}
+            element={authedUser._id ? <Navigate to={"/home"} /> : <SignUp />}
           />
         </Routes>
       </MainLayout>

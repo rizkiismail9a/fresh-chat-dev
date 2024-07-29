@@ -12,7 +12,7 @@ const MessageContainer = () => {
   const { loading } = useGetMessages();
 
   return (
-    <div className="md:min-w-[450px] h-full w-[700px]">
+    <div className="md:min-w-[450px] h-full w-[1000px] flex-1">
       {noChatSelected ? (
         <NoChatSelected />
       ) : (
