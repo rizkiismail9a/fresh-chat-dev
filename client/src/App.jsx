@@ -35,6 +35,7 @@ function App() {
             path="/signup"
             element={authedUser._id ? <Navigate to={"/home"} /> : <SignUp />}
           />
+          <Route path="/" element={<Navigate to={"/home"} />} />
         </Routes>
       </MainLayout>
     </div>

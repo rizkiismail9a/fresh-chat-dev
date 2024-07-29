@@ -22,7 +22,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 
-server.listen(port, () => {
-  connectToDB();
-  console.log("Aplikasi berjalan");
+connectToDB().then(() => {
+  server.listen(port, () => {
+    console.log("Aplikasi berjalan");
+  });
 });
