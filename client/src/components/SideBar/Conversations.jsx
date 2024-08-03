@@ -1,9 +1,11 @@
 import { CiUser } from "react-icons/ci";
 import useGetConversations from "../../hooks/useGetConversation";
+import useListenConversations from "../../hooks/useListenConversation";
 import Conversation from "./Conversation";
 
 const Conversations = ({ searchQuery }) => {
   const { conversations } = useGetConversations(searchQuery);
+  useListenConversations();
 
   return (
     <div>

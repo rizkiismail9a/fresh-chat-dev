@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 const API = ({ headers = {}, params = {} } = {}) => {
   const token = Cookies.get("token");
   const instanse = axios.create({
-    baseURL: "https://api.dev-fresh-chat.my.id/api",
+    baseURL: import.meta.env.VITE_BASE_URI + "/api",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,

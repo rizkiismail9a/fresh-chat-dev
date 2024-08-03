@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../context/auth.context";
@@ -35,12 +36,12 @@ const useSignUp = () => {
         confirmPass: confirmPassword,
       });
 
-      localStorage.setItem("user", JSON.stringify(data.user));
-
       setAuthedUser(data.user);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      Cookies.set("token", data.data.token, { expires: 1 });
       toast.success("Sign Up Success");
     } catch (error) {
-      console.error(error);
+      console.error("error register", error);
       toast.error(error.response.data.message);
     } finally {
       setLoading(false);

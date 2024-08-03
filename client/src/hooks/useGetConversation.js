@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import ConversationsServices from "../services/conversation.services";
 import useConversationStore from "../stores/conversation.store";
 
 const useGetConversations = (search = "") => {
-  const [conversations, setConversations] = useState([]);
+  const { conversations, setConversations } = useConversationStore();
   const { setLoading } = useConversationStore();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const useGetConversations = (search = "") => {
     };
 
     getConversations();
-  }, [search, setLoading]);
+  }, [search, setLoading, setConversations]);
 
   return { conversations };
 };
