@@ -1,13 +1,13 @@
-import express from "express";
-import {
+const express = require("express");
+const {
   getAllUsers,
   getUserWithChat,
-} from "../controllers/user.controller.js";
-import { verifyToken } from "../middlewares/verifyToken.middleware.js";
+} = require("../controllers/user.controller.js");
+const verifyToken = require("../middlewares/verifyToken.middleware.js");
 
 const router = express.Router();
 
 router.get("/all", verifyToken, getAllUsers);
 router.get("/conversations", verifyToken, getUserWithChat);
 
-export default router;
+module.exports = router;

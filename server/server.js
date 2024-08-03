@@ -1,18 +1,17 @@
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import dotenv from "dotenv";
-import express from "express";
-import path from "path";
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const express = require("express");
 
-import corsOption from "./config/cors.config.js";
-import credentials from "./middlewares/credentials.middleware.js";
-import { authRoutes, messageRoutes, userRoutes } from "./routes/index.js";
-import { app, server } from "./socket/socket.js";
+const connectToDB = require("./db/connect.db.js");
+const corsOption = require("./config/cors.config.js");
+const credentials = require("./middlewares/credentials.middleware.js");
+const { authRoutes, messageRoutes, userRoutes } = require("./routes/index.js");
+const { app, server } = require("./socket/socket.js");
 
 dotenv.config();
 
 const port = process.env.PORT;
-const __dirname = path.resolve();
 
 // Middleware
 app.use(credentials);
@@ -23,14 +22,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 
-app.use(express.static(path.join(__dirname, "/client/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
-
 connectToDB().then(() => {
   server.listen(port, () => {
-    console.log("Aplikasi berjalan");
+    console.log(`Aplikasi berjalan pada ${port}`);
   });
 });

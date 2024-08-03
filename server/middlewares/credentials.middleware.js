@@ -4,7 +4,7 @@ const allowedOrigin = [
   "https://fresh-chat-dev.vercel.app",
 ];
 
-const credentials = (req, res, next) => {
+function credentials(req, res, next) {
   const origin = req.headers.origin;
 
   if (allowedOrigin.includes(origin)) {
@@ -13,6 +13,6 @@ const credentials = (req, res, next) => {
   }
 
   next();
-};
+}
 
-export default credentials;
+module.exports = credentials;

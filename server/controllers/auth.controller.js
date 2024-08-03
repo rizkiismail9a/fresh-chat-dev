@@ -1,8 +1,8 @@
-import bcrypt from "bcrypt";
-import User from "../models/user.model.js";
-import { generateTokenandCookie } from "../utils/generateToken.util.js";
+const bcrypt = require("bcrypt");
+const User = require("../models/user.model.js");
+const generateTokenandCookie = require("../utils/generateToken.util.js");
 
-const login = async (req, res) => {
+async function login(req, res) {
   try {
     const { username, password } = req.body;
     if (!username || !password)
@@ -23,7 +23,8 @@ const login = async (req, res) => {
         .json({ status: 403, message: "Incorrect password or username" });
 
     // If username and password valid, generate new token
-    const token = generateTokenandCookie(user._id, res);
+    const token = generateTokenandCookie(user._id.toString(), res);
+
     return res.status(200).json({
       status: 200,
       message: "Login success",
@@ -39,9 +40,9 @@ const login = async (req, res) => {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
   }
-};
+}
 
-const logout = async (req, res) => {
+async function logout(req, res) {
   try {
     res.clearCookie("token", {
       httpOnly: true,
@@ -54,9 +55,9 @@ const logout = async (req, res) => {
     console.error("logout error", error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
-};
+}
 
-const signUp = async (req, res) => {
+async function signUp(req, res) {
   try {
     const { password, confirmPass, fullName, username, gender } = req.body;
     if (!password || !confirmPass || !fullName || !username || !gender)
@@ -96,7 +97,7 @@ const signUp = async (req, res) => {
 
     await newUser.save();
 
-    const token = generateTokenandCookie(String(newUser._id), res);
+    const token = generateTokenandCookie(newUser._id.toString(), res);
 
     return res.status(201).json({
       message: "Sign Up Success",
@@ -114,9 +115,9 @@ const signUp = async (req, res) => {
     console.error("signup error", error);
     return res.status(500).json({ message: "Internal server error" });
   }
-};
+}
 
-const refreshToken = async (req, res) => {
+async function refreshToken(req, res) {
   try {
     const { _id } = req.body; // The id of logged in user
 
@@ -134,6 +135,6 @@ const refreshToken = async (req, res) => {
     console.error("error refresh token", error);
     return res.status(500).json({ message: "Internal server error" });
   }
-};
+}
 
-export { login, logout, refreshToken, signUp };
+module.exports = { login, logout, refreshToken, signUp };
