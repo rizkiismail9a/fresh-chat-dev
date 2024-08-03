@@ -1,7 +1,7 @@
-import Conversation from "../models/conversation.model.js";
-import User from "../models/user.model.js";
+const Conversation = require("../models/conversation.model.js");
+const User = require("../models/user.model.js");
 
-const getAllUsers = async (req, res) => {
+async function getAllUsers(req, res) {
   try {
     //Get all users, also the logged in user
     const users = await User.find().select("-password").exec();
@@ -16,9 +16,9 @@ const getAllUsers = async (req, res) => {
       .status(500)
       .json({ status: 500, message: "Internal server error" });
   }
-};
+}
 
-const getUserWithChat = async (req, res) => {
+async function getUserWithChat(req, res) {
   try {
     const loggedUserId = req.userId;
     const search = req.query.search;
@@ -77,6 +77,6 @@ const getUserWithChat = async (req, res) => {
       .status(500)
       .json({ status: 500, message: "Internal server error" });
   }
-};
+}
 
-export { getAllUsers, getUserWithChat };
+module.exports = { getAllUsers, getUserWithChat };

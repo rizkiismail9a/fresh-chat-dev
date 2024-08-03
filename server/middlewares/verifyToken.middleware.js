@@ -1,9 +1,9 @@
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
 
-export const verifyToken = (req, res, next) => {
+function verifyToken(req, res, next) {
   try {
-    const token = req.cookies.token;
-
+    const authHeader = req.headers.authorization || req.headers.Authorization;
+    const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Hati-hati, ada kemungkinan token yang kadaluwarsa juga bakal true
@@ -14,10 +14,12 @@ export const verifyToken = (req, res, next) => {
 
     next();
   } catch (err) {
-    console.error(err);
+    console.error("error verify token", err);
 
     return res
       .status(401)
       .json({ status: 401, message: "Token invalid or has been expired." });
   }
-};
+}
+
+module.exports = verifyToken;

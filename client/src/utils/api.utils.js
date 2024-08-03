@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 const API = ({ headers = {}, params = {} } = {}) => {
   const token = Cookies.get("token");
   const instanse = axios.create({
-    baseURL: "https://fresh-chat-dev.vercel.app/api",
+    baseURL: "https://api.dev-fresh-chat.my.id/api",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,

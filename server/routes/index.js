@@ -1,5 +1,5 @@
-import authRoutes from "./auth.route.js";
-import messageRoutes from "./message.route.js";
-import userRoutes from "./user.route.js";
+const authRoutes = require("./auth.route.js");
+const messageRoutes = require("./message.route.js");
+const userRoutes = require("./user.route.js");
 
-export { authRoutes, messageRoutes, userRoutes };
+module.exports = { authRoutes, messageRoutes, userRoutes };

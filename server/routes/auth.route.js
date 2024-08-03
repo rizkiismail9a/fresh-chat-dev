@@ -1,11 +1,11 @@
-import express from "express";
-import {
+const express = require("express");
+const {
   login,
   logout,
   refreshToken,
   signUp,
-} from "../controllers/auth.controller.js";
-import { verifyToken } from "../middlewares/verifyToken.middleware.js";
+} = require("../controllers/auth.controller.js");
+const verifyToken = require("../middlewares/verifyToken.middleware.js");
 
 const router = express.Router();
 
@@ -14,4 +14,4 @@ router.post("/logout", logout);
 router.post("/signup", signUp);
 router.post("/refresh", verifyToken, refreshToken);
 
-export default router;
+module.exports = router;

@@ -1,9 +1,10 @@
-import Conversation from "../models/conversation.model.js";
-import Message from "../models/message.model.js";
-import { socket } from "../socket/socket.js";
-import { getSocketId } from "../utils/getSocketId.util.js";
+const Conversation = require("../models/conversation.model.js");
+const Message = require("../models/message.model.js");
+const User = require("../models/user.model.js");
+const { socket } = require("../socket/socket.js");
+const getSocketId = require("../utils/getSocketId.util.js");
 
-const sendMessage = async (req, res) => {
+async function sendMessage(req, res) {
   try {
     const { message } = req.body;
     const { id: receiverId } = req.params; // This is reciever id
@@ -47,11 +48,16 @@ const sendMessage = async (req, res) => {
     await Promise.all([conversation.save(), newMessage.save()]);
 
     const recieverSokcetId = getSocketId(receiverId);
+    const sender = await User.findById(senderId);
 
     if (recieverSokcetId) {
       socket
         .to(recieverSokcetId)
         .emit("newMessage", { status: 201, data: newMessage, senderId });
+
+      socket
+        .to(recieverSokcetId)
+        .emit("newConversation", { status: 200, data: { users: sender } });
     }
 
     return res.status(201).json({ status: 201, data: newMessage });
@@ -62,9 +68,9 @@ const sendMessage = async (req, res) => {
       .status(500)
       .json({ status: 500, message: "Internal server error" });
   }
-};
+}
 
-const getConversation = async (req, res) => {
+async function getConversation(req, res) {
   try {
     const { id: receiverId } = req.params;
     const { userId: senderId } = req;
@@ -99,5 +105,5 @@ const getConversation = async (req, res) => {
       .status(500)
       .json({ status: 500, message: "Internal server error" });
   }
-};
-export { getConversation, sendMessage };
+}
+module.exports = { getConversation, sendMessage };

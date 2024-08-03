@@ -1,5 +1,7 @@
-import { socketOptions } from "../socket/socket.js";
+const socketOptions = require("../socket/socket.js");
 
-export const getSocketId = (recieverId) => {
+function getSocketId(recieverId) {
   return socketOptions[recieverId];
-};
+}
+
+module.exports = getSocketId;

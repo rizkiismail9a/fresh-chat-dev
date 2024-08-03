@@ -11,7 +11,7 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (authedUser._id) {
-      const socket = io("https://fresh-chat-dev.vercel.app", {
+      const socket = io("https://api.dev-fresh-chat.my.id", {
         query: {
           userId: authedUser._id,
         },
