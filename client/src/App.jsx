@@ -23,7 +23,6 @@ function App() {
       <MainLayout>
         <Routes>
           <Route
-            exact
             path="/home"
             element={!authedUser._id ? <Navigate to={"/login"} /> : <Home />}
           />
