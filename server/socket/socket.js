@@ -1,17 +1,18 @@
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
+const socketOptions = require("../options/socketOptions.js");
 
 const app = express();
 const server = http.createServer(app);
 const socket = new Server(server, {
   cors: {
-    origin: ["http://localhost:5000"], // Port client
+    origin: ["https://fresh-chat-dev.vercel.app"], // Port client
     methods: ["GET", "POST"],
   },
 });
 
-const socketOptions = {};
+// const socketOptions = {};
 
 // Listen to the events emitted from the Server object
 socket.on("connection", (socket) => {

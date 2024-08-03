@@ -1,4 +1,4 @@
-const socketOptions = require("../socket/socket.js");
+const socketOptions = require("../options/socketOptions.js");
 
 function getSocketId(recieverId) {
   return socketOptions[recieverId];
