@@ -1,7 +1,7 @@
 const allowedOrigin = [
   "http://localhost:5000",
   "http://localhost:8000",
-  "https://fresh-chat-dev.vercel.app",
+  "https://dev-fresh-chat.my.id",
 ];
 
 function credentials(req, res, next) {
