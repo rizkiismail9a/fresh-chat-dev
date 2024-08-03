@@ -71,6 +71,7 @@ const Login = () => {
               <input
                 type="text"
                 id="username"
+                autoComplete="off"
                 placeholder="Enter username"
                 className="input bg-white-0 glass h-10 text-white"
                 required
@@ -86,6 +87,7 @@ const Login = () => {
               <input
                 type="password"
                 id="password"
+                autoComplete="off"
                 placeholder="Enter password"
                 className="input bg-white-0 glass h-10 text-white"
                 required

@@ -7,7 +7,7 @@ const Message = ({ message }) => {
   const { selectedConversation } = useConversationStore();
   const isFromMe = authedUser._id === message.senderId;
   const profileImg = isFromMe
-    ? authedUser.userImage
+    ? authedUser.profileImg
     : selectedConversation.profileImg;
 
   return (
