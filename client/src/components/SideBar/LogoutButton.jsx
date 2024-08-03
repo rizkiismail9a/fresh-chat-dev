@@ -3,10 +3,12 @@ import { BiLogOut } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/auth.context";
 import AuthenticationServices from "../../services/auth.services";
+import useConversationStore from "../../stores/conversation.store";
 
 const LogoutButton = () => {
   const navigate = useNavigate();
   const { setAuthedUser } = useAuthContext();
+  const { setSelectedConversation, setMessages } = useConversationStore();
 
   /*
    * To logout, it just needs to call the API service of logout here
@@ -17,6 +19,8 @@ const LogoutButton = () => {
       await AuthenticationServices.logout();
       navigate("/login");
       setAuthedUser({});
+      setMessages([]);
+      setSelectedConversation(null);
       localStorage.clear();
     } catch (error) {
       console.error("logout error", error);
