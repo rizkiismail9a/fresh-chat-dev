@@ -9,6 +9,7 @@ const Messages = () => {
   useListenMessages();
 
   useEffect(() => {
+    // Set timeout to make sure the fetching data is finish first
     setTimeout(() => {
       lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 50);

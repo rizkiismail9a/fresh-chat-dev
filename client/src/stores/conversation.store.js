@@ -16,6 +16,8 @@ const useConversationStore = create((set) => {
     setLoading: (isLoading) => set({ loading: isLoading }),
     showSidebar: true,
     setShowSidebar: (isSideBarShown) => set({ showSidebar: isSideBarShown }),
+    conversations: [],
+    setConversations: (conv) => set({ conversations: conv }),
   };
 });
 

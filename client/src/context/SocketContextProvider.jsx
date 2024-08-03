@@ -11,7 +11,7 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (authedUser._id) {
-      const socket = io("https://api.dev-fresh-chat.my.id", {
+      const socket = io(import.meta.env.VITE_BASE_URI, {
         query: {
           userId: authedUser._id,
         },
