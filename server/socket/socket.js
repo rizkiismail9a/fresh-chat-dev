@@ -7,12 +7,10 @@ const app = express();
 const server = http.createServer(app);
 const socket = new Server(server, {
   cors: {
-    origin: ["https://fresh-chat-dev.vercel.app"], // Port client
+    origin: [process.env.CLIENT_ORIGIN], // Port client
     methods: ["GET", "POST"],
   },
 });
-
-// const socketOptions = {};
 
 // Listen to the events emitted from the Server object
 socket.on("connection", (socket) => {

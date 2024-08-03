@@ -9,6 +9,7 @@ async function sendMessage(req, res) {
     const { message } = req.body;
     const { id: receiverId } = req.params; // This is reciever id
     const { userId: senderId } = req;
+    const recieverSokcetId = getSocketId(receiverId);
 
     let conversation;
 
@@ -28,12 +29,16 @@ async function sendMessage(req, res) {
       });
     }
 
-    // If the conversation is not available, create new one
+    // If the conversation is not available, create new one and tell the reciever
     if (!conversation) {
+      const sender = await User.findById(senderId);
       conversation = await Conversation.create({
         participants:
           receiverId === senderId ? [receiverId] : [receiverId, senderId],
       });
+      socket
+        .to(recieverSokcetId)
+        .emit("newConversation", { status: 200, data: { users: sender } });
     }
 
     // Now, create the message
@@ -47,17 +52,10 @@ async function sendMessage(req, res) {
 
     await Promise.all([conversation.save(), newMessage.save()]);
 
-    const recieverSokcetId = getSocketId(receiverId);
-    const sender = await User.findById(senderId);
-
     if (recieverSokcetId) {
       socket
         .to(recieverSokcetId)
         .emit("newMessage", { status: 201, data: newMessage, senderId });
-
-      socket
-        .to(recieverSokcetId)
-        .emit("newConversation", { status: 200, data: { users: sender } });
     }
 
     return res.status(201).json({ status: 201, data: newMessage });
