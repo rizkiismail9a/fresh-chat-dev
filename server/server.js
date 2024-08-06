@@ -3,13 +3,14 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const express = require("express");
 
+dotenv.config();
+
 const connectToDB = require("./db/connect.db.js");
 const corsOption = require("./config/cors.config.js");
 const credentials = require("./middlewares/credentials.middleware.js");
 const { authRoutes, messageRoutes, userRoutes } = require("./routes/index.js");
-const { app, server } = require("./socket/socket.js");
 
-dotenv.config();
+const { app, server } = require("./socket/socket.js");
 
 const port = process.env.PORT;
 

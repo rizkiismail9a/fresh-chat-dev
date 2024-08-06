@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiSend } from "react-icons/bi";
 import useSendMessage from "../../hooks/useSendMessage";
+import useConversationStore from "../../stores/conversation.store";
 
-const MessageInput = () => {
-  const [newMessage, setNewMessage] = useState("");
-  const { sendMessage, loading } = useSendMessage();
+const MessageInput = ({ onInputChange }) => {
+  const [typedMessage, setTypedMessage] = useState("");
+  const { sendMessage, loading, newMessage } = useSendMessage();
+  const { setUserScroll } = useConversationStore();
 
   const submitNewMessage = async (e) => {
     e.preventDefault();
-    if (!newMessage.length) return;
-    await sendMessage(newMessage);
-    setNewMessage("");
+    if (!typedMessage.length) return;
+    setUserScroll(false);
+    await sendMessage(typedMessage);
+    setTypedMessage("");
   };
+
+  useEffect(() => {
+    onInputChange(newMessage);
+  }, [newMessage, onInputChange]);
 
   return (
     <form className="px-4 my-3" onSubmit={submitNewMessage}>
@@ -20,9 +27,9 @@ const MessageInput = () => {
           type="text"
           id="input-message"
           placeholder="Send a message"
-          value={newMessage}
+          value={typedMessage}
           className="border text-sm rounded-lg focus:outline-none block w-full p-2.5 bg-gray-700 border-gray-600 text-white"
-          onChange={(e) => setNewMessage(e.target.value)}
+          onChange={(e) => setTypedMessage(e.target.value)}
           autoComplete="off"
         />
         <button

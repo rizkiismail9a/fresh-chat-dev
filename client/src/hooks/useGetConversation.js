@@ -3,6 +3,11 @@ import toast from "react-hot-toast";
 import ConversationsServices from "../services/conversation.services";
 import useConversationStore from "../stores/conversation.store";
 
+/*
+ * Get the user profile list based on the search query, when the search is empty,
+ * it will return old messages history
+ *
+ */
 const useGetConversations = (search = "") => {
   const { conversations, setConversations } = useConversationStore();
   const { setLoading } = useConversationStore();

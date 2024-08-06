@@ -33,7 +33,7 @@ async function login(req, res) {
         _id: user._id,
         fullName: user.fullName,
         username: user.username,
-        userImage: user.profileImg,
+        profileImg: user.profileImg,
       },
     });
   } catch (error) {
@@ -102,7 +102,7 @@ async function signUp(req, res) {
     return res.status(201).json({
       message: "Sign Up Success",
       status: 201,
-      user: {
+      data: {
         token,
         _id: newUser._id,
         fullName,

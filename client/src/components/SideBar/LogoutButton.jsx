@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { BiLogOut } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +23,7 @@ const LogoutButton = () => {
       setMessages([]);
       setSelectedConversation(null);
       localStorage.clear();
+      Cookies.clear();
     } catch (error) {
       console.error("logout error", error);
       toast.error(error.response.data.message);

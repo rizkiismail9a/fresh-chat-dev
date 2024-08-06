@@ -2,6 +2,10 @@ import { useEffect } from "react";
 import { useSocketContext } from "../context/socket.context";
 import useConversationStore from "../stores/conversation.store";
 
+/*
+ * Listen for socket emit for new conversation, this is when someone send message to user
+ * whose never been talked with before
+ */
 const useListenConversations = () => {
   const { socket } = useSocketContext();
   const { conversations, setConversations } = useConversationStore();
