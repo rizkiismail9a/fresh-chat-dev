@@ -19,7 +19,7 @@ import useConversationStore from "../stores/conversation.store.js";
  */
 const useListenMessages = () => {
   const { socket } = useSocketContext();
-  const { selectedConversation, setShowScrollArrow } = useConversationStore();
+  const { selectedConversation } = useConversationStore();
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -29,13 +29,12 @@ const useListenMessages = () => {
 
       if (selectedConversation._id === senderId) {
         setMessages([newMessages]);
-        setShowScrollArrow(true);
       }
     });
 
     // Remove the event listener
     return () => socket?.off("newMessage");
-  }, [socket, messages, setMessages, selectedConversation, setShowScrollArrow]);
+  }, [socket, messages, setMessages, selectedConversation]);
 
   return { listenedMessage: messages };
 };
