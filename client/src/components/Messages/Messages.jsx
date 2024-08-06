@@ -9,15 +9,10 @@ import Message from "./Message";
 // New message is array from message input and listen new message
 const Messages = ({ newMassage }) => {
   const lastMessageRef = useRef();
+  const messageContainer = useRef();
   const [messages, setMessages] = useState([]);
-  const {
-    page,
-    setPage,
-    userScroll,
-    setUserScroll,
-    showScrollArrow,
-    setShowScrollArrow,
-  } = useConversationStore();
+  const { page, setPage, userScroll, setUserScroll } = useConversationStore();
+  const [showScrollArrow, setShowScrollArrow] = useState(false);
   const { gottenMessages, loading } = useGetMessages(page, 10);
 
   const { listenedMessage } = useListenMessages();
@@ -45,6 +40,7 @@ const Messages = ({ newMassage }) => {
 
   // If socket emit new litened messages, just put it in the very bottom of the list
   useEffect(() => {
+    setShowScrollArrow(true);
     setMessages((prev) => [...prev, ...listenedMessage]);
   }, [listenedMessage]);
 
@@ -82,10 +78,31 @@ const Messages = ({ newMassage }) => {
     }
   }, [newMassage]);
 
+  // Show the scroll arrow if user scrolling to top
+  useEffect(() => {
+    const handleScroll = () => {
+      if (messageContainer.current) {
+        const { scrollTop, scrollHeight, clientHeight } =
+          messageContainer.current;
+        const isAtBottom = scrollTop + clientHeight >= scrollHeight;
+        setShowScrollArrow(!isAtBottom);
+      }
+    };
+
+    const container = messageContainer.current;
+    if (container) {
+      container.addEventListener("scroll", handleScroll);
+      return () => {
+        container.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, []);
+
   return (
     <div
       id="message-container"
       className="p-4 flex-1 flex flex-col gap-2 overflow-auto"
+      ref={messageContainer}
     >
       <div>{loading && <MessageSkeleton />}</div>
       {messages.length &&
