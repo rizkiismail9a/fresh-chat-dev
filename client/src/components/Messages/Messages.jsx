@@ -54,8 +54,6 @@ const Messages = ({ newMassage }) => {
    */
   useEffect(() => {
     setTimeout(() => {
-      console.log(!userScroll);
-
       if (!userScroll) {
         lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
       }

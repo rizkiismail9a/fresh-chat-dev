@@ -3,6 +3,14 @@ import toast from "react-hot-toast";
 import MessagesServices from "../services/messages.services";
 import useConversationStore from "../stores/conversation.store";
 
+/*
+ *
+ * Get message hook to get messages history from API where it accepts two parameters
+ * @params:
+ * page: the number of page to be fetched
+ * limit: the amount of message to be returned by API
+ *
+ */
 const useGetMessages = (page, limit) => {
   const { selectedConversation } = useConversationStore();
   const [currentId, setCurrentId] = useState("");
@@ -22,7 +30,9 @@ const useGetMessages = (page, limit) => {
         );
 
         // Prev is needed since we have to keep old message everytime page is changing
-        setGottenMessages((prev) => [...data.data.messages, ...prev]);
+        if (data.data.messages) {
+          setGottenMessages((prev) => [...data.data.messages, ...prev]);
+        }
       } catch (error) {
         console.error("error get message", error);
         toast.error("Failed to get messages");
@@ -31,6 +41,7 @@ const useGetMessages = (page, limit) => {
       }
     };
 
+    // Check if the current id is the same with the new selected on
     if (currentId !== selectedConversation._id) {
       setCurrentId(selectedConversation._id);
       setGottenMessages([]);
