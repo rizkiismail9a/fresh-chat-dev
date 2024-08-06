@@ -71,6 +71,7 @@ async function sendMessage(req, res) {
 async function getConversation(req, res) {
   try {
     const { id: receiverId } = req.params;
+    const { limit, page } = req.query;
     const { userId: senderId } = req;
 
     /*
@@ -91,10 +92,26 @@ async function getConversation(req, res) {
         data: [],
       });
 
+    const startIndex = (Number(page) - 1) * Number(limit);
+    const endIndex = Number(page) * Number(limit);
+    // const totalMessages = conversation.messages.length;
+
+    const slicedMessages = Array.from(conversation.messages)
+      .reverse()
+      .slice(startIndex, endIndex)
+      .reverse();
+
     return res.status(200).json({
       status: 200,
       message: "Succeed to get conversation",
-      data: conversation,
+      data: {
+        participants: conversation.participants,
+        messages: slicedMessages,
+        createdAt: conversation.createdAt,
+        updatedAt: conversation.updatedAt,
+        _id: conversation._id,
+        totalMessages: slicedMessages.length,
+      },
     });
   } catch (error) {
     console.error("error get conversation", error);

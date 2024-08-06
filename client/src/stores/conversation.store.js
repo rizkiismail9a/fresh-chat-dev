@@ -18,6 +18,12 @@ const useConversationStore = create((set) => {
     setShowSidebar: (isSideBarShown) => set({ showSidebar: isSideBarShown }),
     conversations: [],
     setConversations: (conv) => set({ conversations: conv }),
+    page: 1,
+    setPage: (num) => set({ page: num }),
+    userScroll: false,
+    setUserScroll: (isScroll) => set({ userScroll: isScroll }),
+    showScrollArrow: false,
+    setShowScrollArrow: (isShown) => set({ showScrollArrow: isShown }),
   };
 });
 

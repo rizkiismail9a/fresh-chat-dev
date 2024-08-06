@@ -25,7 +25,6 @@ const Message = ({ message }) => {
         >
           {message.message}
         </div>
-
         <div className="chat-footer text-xs text-gray-50">
           {formatDate(message.createdAt)}
         </div>
