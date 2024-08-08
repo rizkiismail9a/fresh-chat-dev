@@ -26,7 +26,7 @@ const Chat = () => {
           property="og:image"
           content="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
         />
-        <title>Chat - Fresh Chat Dev</title>
+        <title>Chat Room - Fresh Chat Dev</title>
       </Helmet>
 
       <MessageContainer />

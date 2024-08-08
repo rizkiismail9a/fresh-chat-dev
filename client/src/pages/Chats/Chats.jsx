@@ -35,7 +35,7 @@ const Chats = () => {
           property="og:image"
           content="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
         />
-        <title>Chat - Fresh Chat Dev</title>
+        <title>Chats - Fresh Chat Dev</title>
       </Helmet>
       <SearchInput onChange={(e) => typeSearchQuery(e)} />
       <div className="divider h-1 my-0 py-0" />
