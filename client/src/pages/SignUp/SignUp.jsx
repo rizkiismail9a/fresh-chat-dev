@@ -63,15 +63,15 @@ const SignUp = () => {
         </h1>
 
         <form onSubmit={submitData} className="flex flex-col gap-1">
-          <label className="label">
-            <span className="text-base label-text text-gray-100">
+          <label className="label gap-2">
+            <span className="text-base label-text text-gray-100 w-[50%]">
               Full Name
             </span>
             <input
               type="text"
               id="fullName"
               placeholder="Enter fullname"
-              className="input bg-white-0 glass h-10 text-white"
+              className="input bg-white-0 glass h-10 text-white w-full"
               required
               value={signUpData.fullName}
               autoComplete="off"
@@ -81,14 +81,16 @@ const SignUp = () => {
             />
           </label>
 
-          <label className="label">
-            <span className="text-base label-text text-gray-100">Username</span>
+          <label className="label gap-2">
+            <span className="text-base label-text text-gray-100 w-[50%]">
+              Username
+            </span>
             <input
               type="text"
               id="username"
               autoComplete="off"
               placeholder="Enter username"
-              className="input bg-white-0 glass h-10 text-white"
+              className="input bg-white-0 glass h-10 text-white w-full"
               required
               value={signUpData.username}
               onChange={(e) =>
@@ -97,13 +99,15 @@ const SignUp = () => {
             />
           </label>
 
-          <label className="label">
-            <span className="text-base label-text text-gray-100">Password</span>
+          <label className="label gap-2">
+            <span className="text-base label-text text-gray-100 w-[50%]">
+              Password
+            </span>
             <input
               type="password"
               id="password"
               placeholder="Enter password"
-              className="input bg-white-0 glass h-10 text-white"
+              className="input bg-white-0 glass h-10 text-white w-full"
               required
               value={signUpData.password}
               onChange={(e) =>
@@ -112,15 +116,15 @@ const SignUp = () => {
             />
           </label>
 
-          <label className="label gap-3">
-            <span className="text-base label-text text-gray-100">
+          <label className="label gap-2">
+            <span className="text-base label-text text-gray-100 w-[50%]">
               Confirm Password
             </span>
             <input
               type="password"
               id="confirmPassword"
               placeholder="Enter password confirmation"
-              className="input bg-white-0 glass h-10 text-white"
+              className="input bg-white-0 glass h-10 text-white w-full"
               required
               value={signUpData.confirmPassword}
               onChange={(e) =>

@@ -69,27 +69,27 @@ const Login = () => {
         </h1>
 
         <form onSubmit={login} className="flex flex-col gap-1">
-          <label className="label gap-3">
+          <label className="label gap-2">
             <span className="text-base label-text text-gray-100">Username</span>
             <input
               type="text"
               id="username"
               autoComplete="off"
               placeholder="Enter username"
-              className="input bg-white-0 glass h-10 text-white"
+              className="input bg-white-0 glass h-10 text-white w-full"
               required
               ref={username}
             />
           </label>
 
-          <label className="label">
+          <label className="label gap-2">
             <span className="text-base label-text text-gray-100">Password</span>
             <input
               type="password"
               id="password"
               autoComplete="off"
               placeholder="Enter password"
-              className="input bg-white-0 glass h-10 text-white"
+              className="input bg-white-0 glass h-10 text-white w-full"
               required
               ref={password}
             />
