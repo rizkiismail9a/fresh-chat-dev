@@ -18,6 +18,7 @@ function App() {
   const { loading } = useConversationStore();
   const { pathname } = useLocation();
   useResize();
+  // useInputFocusHandler();
 
   return (
     <div className="tablet:p-4 p-2 flex flex-col gap-3 items-center justify-center h-screen">

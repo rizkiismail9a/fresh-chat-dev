@@ -9,9 +9,9 @@ import useConversationStore from "../../stores/conversation.store";
 
 const Login = () => {
   const { setAuthedUser } = useAuthContext();
-  const username = useRef("");
+  const username = useRef();
   const { setLoading } = useConversationStore();
-  const password = useRef("");
+  const password = useRef();
 
   /*
    * Login function run when user click login button
@@ -43,7 +43,7 @@ const Login = () => {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <meta name="description" content="Login to Fresh Chat app" />
         <meta name="keywords" content="chatting, chatting app" />
         <meta name="author" content="Yuri Ostrovsky" />
