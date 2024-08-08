@@ -17,8 +17,7 @@ function App() {
   const { authedUser } = useContext(AuthContext);
   const { loading } = useConversationStore();
   const { pathname } = useLocation();
-  useResize();
-  // useInputFocusHandler();
+  const { isOnMobile } = useResize();
 
   return (
     <div className="tablet:p-4 p-2 flex flex-col gap-3 items-center justify-center h-screen">
@@ -41,13 +40,28 @@ function App() {
           />
           <Route
             path="/login"
-            element={authedUser._id ? <Navigate to={"/home"} /> : <Login />}
+            element={
+              authedUser._id ? (
+                <Navigate to={`${isOnMobile ? "/chats" : "/home"}`} />
+              ) : (
+                <Login />
+              )
+            }
           />
           <Route
             path="/signup"
-            element={authedUser._id ? <Navigate to={"/home"} /> : <SignUp />}
+            element={
+              authedUser._id ? (
+                <Navigate to={`${isOnMobile ? "/chats" : "/home"}`} />
+              ) : (
+                <SignUp />
+              )
+            }
           />
-          <Route path="/" element={<Navigate to={"/home"} />} />
+          <Route
+            path="/"
+            element={<Navigate to={`${isOnMobile ? "/chats" : "/home"}`} />}
+          />
         </Routes>
       </MainLayout>
     </div>
