@@ -36,8 +36,8 @@ const useSignUp = () => {
         confirmPass: confirmPassword,
       });
 
-      setAuthedUser(data.user);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      setAuthedUser(data.data);
+      localStorage.setItem("user", JSON.stringify(data.data));
       Cookies.set("token", data.data.token, { expires: 1 });
       toast.success("Sign Up Success");
     } catch (error) {
