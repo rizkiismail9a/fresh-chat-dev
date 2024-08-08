@@ -79,4 +79,51 @@ async function getUserWithChat(req, res) {
   }
 }
 
-module.exports = { getAllUsers, getUserWithChat };
+async function editUser(req, res) {
+  try {
+    const { username, fullName, userId, gender } = req.body;
+    if (!userId)
+      return res
+        .send(400)
+        .json({ status: 400, message: "user id is required" });
+
+    const user = await User.findById(userId).exec();
+
+    if (!user)
+      return res.status(404).json({ status: 404, message: "User not found" });
+
+    // Check if the username is already used by other people
+    if (username) {
+      const foundUsers = await User.findOne({ username }).exec();
+
+      // Convert the foundUsers id to string first, since it is objectId at first
+      if (!!foundUsers && foundUsers._id.toString() !== userId) {
+        return res
+          .status(400)
+          .json({ status: 400, message: "Username is already used" });
+      }
+      user.username = username;
+    }
+
+    if (gender) {
+      user.gender = gender;
+    }
+
+    if (fullName) {
+      user.fullName = fullName;
+    }
+
+    await user.save();
+
+    return res
+      .status(201)
+      .json({ status: 201, message: "Profile is successfully updated" });
+  } catch (error) {
+    console.error("error editUser", error);
+    return res
+      .status(500)
+      .json({ status: 500, message: "Internal server error" });
+  }
+}
+
+module.exports = { getAllUsers, getUserWithChat, editUser };
