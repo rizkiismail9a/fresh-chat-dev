@@ -14,7 +14,6 @@ const Messages = ({ newMassage }) => {
   const { page, setPage, userScroll, setUserScroll } = useConversationStore();
   const [showScrollArrow, setShowScrollArrow] = useState(false);
   const { gottenMessages, loading } = useGetMessages(page, 10);
-
   const { listenedMessage } = useListenMessages();
 
   // Scroll to the most bottom of the page
@@ -101,21 +100,22 @@ const Messages = ({ newMassage }) => {
   return (
     <div
       id="message-container"
-      className="p-4 flex-1 flex flex-col gap-2 overflow-auto"
+      className="p-4 flex-1 flex flex-col gap-2 overflow-auto tablet:h-full"
       ref={messageContainer}
     >
       <div>{loading && <MessageSkeleton />}</div>
-      {messages.length &&
-        messages?.map((item, index) => (
-          <div
-            key={item._id}
-            ref={index === messages.length - 1 ? lastMessageRef : null}
-          >
-            {/* Ref can only be refered into one DOM element at one time, thus the looping will overwritten the ref props and end up with the last one */}
-            <Message message={item} />
-          </div>
-        ))}
-
+      <div className="self-end w-full">
+        {messages &&
+          messages?.map((item, index) => (
+            <div
+              key={item._id}
+              ref={index === messages.length - 1 ? lastMessageRef : null}
+            >
+              {/* Ref can only be refered into one DOM element at one time, thus the looping will overwritten the ref props and end up with the last one */}
+              <Message message={item} />
+            </div>
+          ))}
+      </div>
       {showScrollArrow && (
         <button
           onClick={scrollToBottom}

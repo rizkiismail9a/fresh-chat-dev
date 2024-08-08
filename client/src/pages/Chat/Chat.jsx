@@ -1,13 +1,10 @@
 import Helmet from "react-helmet";
 
 import MessageContainer from "../../components/Messages/MessageContainer";
-import SideBar from "../../components/SideBar/SideBar";
-import useConversationStore from "../../stores/conversation.store";
 
-const Home = () => {
-  const { showSidebar } = useConversationStore();
+const Chat = () => {
   return (
-    <div className="h-[550px] tablet:w-[1000px] overflow-auto flex">
+    <div className="w-full h-full flex">
       <Helmet>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,14 +24,12 @@ const Home = () => {
           property="og:image"
           content="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
         />
-        <title>Home - Fresh Chat Dev</title>
+        <title>Chat - Fresh Chat Dev</title>
       </Helmet>
-      <div className={`${showSidebar ? "" : "w-0"}`}>
-        <SideBar />
-      </div>
+
       <MessageContainer />
     </div>
   );
 };
 
-export default Home;
+export default Chat;

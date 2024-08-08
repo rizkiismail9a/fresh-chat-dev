@@ -27,15 +27,18 @@
   font-family: "Exo 2", sans-serif;
   line-height: 1.5rem !important;
   letter-spacing: 0.24px;
+  box-sizing: border-box;
   scrollbar-width: thin;
   scrollbar-color: gray;
   scrollbar-arrow-color: green;
 }
 
 body {
-  background-image: url("/bg.jpg");
+  /* background-image: url("/bg.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
-  /* background-color: rgb(227, 205, 176); */
+  background-size: cover; */
+  background-color: rgb(227, 205, 176);
+  /* min-width: 100vw; */
+  /* min-height: 90vh; */
 }

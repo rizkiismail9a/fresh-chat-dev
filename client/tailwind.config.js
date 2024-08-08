@@ -7,6 +7,10 @@ export default {
         danau: "url('./src/assets/image/bg.jpg')",
       },
     },
+    screens: {
+      desktop: "1440px",
+      tablet: "768px",
+    },
   },
   // eslint-disable-next-line no-undef
   plugins: [require("daisyui")],

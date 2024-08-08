@@ -19,7 +19,7 @@ import useConversationStore from "../stores/conversation.store.js";
  */
 const useListenMessages = () => {
   const { socket } = useSocketContext();
-  const { selectedConversation } = useConversationStore();
+  const { selectedConversation, setUserScroll } = useConversationStore();
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -28,12 +28,14 @@ const useListenMessages = () => {
       const senderId = dataEmit.senderId;
 
       if (selectedConversation._id === senderId) {
+        setUserScroll(false);
         setMessages([newMessages]);
       }
     });
 
     // Remove the event listener
     return () => socket?.off("newMessage");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket, messages, setMessages, selectedConversation]);
 
   return { listenedMessage: messages };

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import MessagesServices from "../services/messages.services";
-import useConversationStore from "../stores/conversation.store";
 
 /*
  * Send new messages to the sender
@@ -19,15 +18,16 @@ import useConversationStore from "../stores/conversation.store";
  * 
  */
 const useSendMessage = () => {
+  const storedSession = JSON.parse(sessionStorage.getItem("active-chat"));
   const [loading, setLoading] = useState(false);
-  const { selectedConversation } = useConversationStore();
+  // const { selectedConversation } = useConversationStore();
   const [newMessage, setNewMessage] = useState([]);
 
   const sendMessage = async (typedMessage) => {
     try {
       setLoading(true);
       const { data } = await MessagesServices.sendMessage(
-        selectedConversation?._id,
+        storedSession?._id,
         typedMessage
       );
 
