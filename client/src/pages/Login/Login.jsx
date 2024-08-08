@@ -5,10 +5,12 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../context/auth.context";
 import AuthenticationServices from "../../services/auth.services";
+import useConversationStore from "../../stores/conversation.store";
 
 const Login = () => {
   const { setAuthedUser } = useAuthContext();
   const username = useRef("");
+  const { setLoading } = useConversationStore();
   const password = useRef("");
 
   /*
@@ -20,6 +22,7 @@ const Login = () => {
   const login = async (e) => {
     try {
       e.preventDefault();
+      setLoading(true);
       const { data } = await AuthenticationServices.login({
         username: username.current.value,
         password: password.current.value,
@@ -31,6 +34,8 @@ const Login = () => {
     } catch (error) {
       console.error("login error", error);
       toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,47 +59,42 @@ const Login = () => {
         />
         <title>Login - Fresh Chat Dev</title>
       </Helmet>
+
       <div
         data-section="login-wrapper"
-        className="flex flex-col gap-8 p-4 min-w-96 rounded-lg leading-normal"
+        className="flex flex-col gap-8 p-4 !w-full tablet:w-96 rounded-lg leading-normal"
       >
-        <h1 className="text-3xl font-semibold text-center text-gray-300">
+        <h1 className="text-3xl font-semibold text-center text-gray-50">
           Login <span className="text-blue-400">Fresh Chat</span>
         </h1>
 
         <form onSubmit={login} className="flex flex-col gap-1">
-          <div>
-            <label className="label">
-              <span className="text-base label-text text-gray-100">
-                Username
-              </span>
-              <input
-                type="text"
-                id="username"
-                autoComplete="off"
-                placeholder="Enter username"
-                className="input bg-white-0 glass h-10 text-white"
-                required
-                ref={username}
-              />
-            </label>
-          </div>
-          <div>
-            <label className="label">
-              <span className="text-base label-text text-gray-100">
-                Password
-              </span>
-              <input
-                type="password"
-                id="password"
-                autoComplete="off"
-                placeholder="Enter password"
-                className="input bg-white-0 glass h-10 text-white"
-                required
-                ref={password}
-              />
-            </label>
-          </div>
+          <label className="label gap-3">
+            <span className="text-base label-text text-gray-100">Username</span>
+            <input
+              type="text"
+              id="username"
+              autoComplete="off"
+              placeholder="Enter username"
+              className="input bg-white-0 glass h-10 text-white"
+              required
+              ref={username}
+            />
+          </label>
+
+          <label className="label">
+            <span className="text-base label-text text-gray-100">Password</span>
+            <input
+              type="password"
+              id="password"
+              autoComplete="off"
+              placeholder="Enter password"
+              className="input bg-white-0 glass h-10 text-white"
+              required
+              ref={password}
+            />
+          </label>
+
           <div>
             <Link
               to="/signup"

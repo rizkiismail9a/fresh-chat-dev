@@ -1,12 +1,12 @@
 import Cookies from "js-cookie";
-import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../context/auth.context";
 import AuthenticationServices from "../services/auth.services";
+import useConversationStore from "../stores/conversation.store";
 
 const useSignUp = () => {
-  const [loading, setLoading] = useState(false);
   const { setAuthedUser } = useAuthContext();
+  const { setLoading } = useConversationStore();
 
   const register = async ({
     fullName,
@@ -48,7 +48,7 @@ const useSignUp = () => {
     }
   };
 
-  return { register, loading };
+  return { register };
 };
 
 const validateForm = ({

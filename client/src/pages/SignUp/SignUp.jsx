@@ -56,90 +56,82 @@ const SignUp = () => {
       </Helmet>
       <div
         data-section="signup-wrapper"
-        className="flex flex-col gap-8 p-4 w-full rounded-lg min-w-[28rem] leading-normal"
+        className="flex flex-col gap-8 p-4 rounded-lg tablet:min-w-[28rem] leading-normal"
       >
-        <h1 className="text-3xl font-semibold text-center text-gray-300">
+        <h1 className="text-3xl font-semibold text-center text-gray-50">
           Sign Up <span className="text-blue-400">Fresh Chat</span>
         </h1>
 
         <form onSubmit={submitData} className="flex flex-col gap-1">
-          <div>
-            <label className="label">
-              <span className="text-base label-text text-gray-100">
-                Full Name
-              </span>
-              <input
-                type="text"
-                id="fullName"
-                placeholder="Enter fullname"
-                className="input bg-white-0 glass h-10 text-white"
-                required
-                value={signUpData.fullName}
-                autoComplete="off"
-                onChange={(e) =>
-                  setSignUpData({ ...signUpData, fullName: e.target.value })
-                }
-              />
-            </label>
-          </div>
-          <div>
-            <label className="label">
-              <span className="text-base label-text text-gray-100">
-                Username
-              </span>
-              <input
-                type="text"
-                id="username"
-                autoComplete="off"
-                placeholder="Enter username"
-                className="input bg-white-0 glass h-10 text-white"
-                required
-                value={signUpData.username}
-                onChange={(e) =>
-                  setSignUpData({ ...signUpData, username: e.target.value })
-                }
-              />
-            </label>
-          </div>
-          <div>
-            <label className="label">
-              <span className="text-base label-text text-gray-100">
-                Password
-              </span>
-              <input
-                type="password"
-                id="password"
-                placeholder="Enter password"
-                className="input bg-white-0 glass h-10 text-white"
-                required
-                value={signUpData.password}
-                onChange={(e) =>
-                  setSignUpData({ ...signUpData, password: e.target.value })
-                }
-              />
-            </label>
-          </div>
-          <div>
-            <label className="label">
-              <span className="text-base label-text text-gray-100">
-                Confirm Password
-              </span>
-              <input
-                type="password"
-                id="confirmPassword"
-                placeholder="Enter password confirmation"
-                className="input bg-white-0 glass h-10 text-white"
-                required
-                value={signUpData.confirmPassword}
-                onChange={(e) =>
-                  setSignUpData({
-                    ...signUpData,
-                    confirmPassword: e.target.value,
-                  })
-                }
-              />
-            </label>
-          </div>
+          <label className="label">
+            <span className="text-base label-text text-gray-100">
+              Full Name
+            </span>
+            <input
+              type="text"
+              id="fullName"
+              placeholder="Enter fullname"
+              className="input bg-white-0 glass h-10 text-white"
+              required
+              value={signUpData.fullName}
+              autoComplete="off"
+              onChange={(e) =>
+                setSignUpData({ ...signUpData, fullName: e.target.value })
+              }
+            />
+          </label>
+
+          <label className="label">
+            <span className="text-base label-text text-gray-100">Username</span>
+            <input
+              type="text"
+              id="username"
+              autoComplete="off"
+              placeholder="Enter username"
+              className="input bg-white-0 glass h-10 text-white"
+              required
+              value={signUpData.username}
+              onChange={(e) =>
+                setSignUpData({ ...signUpData, username: e.target.value })
+              }
+            />
+          </label>
+
+          <label className="label">
+            <span className="text-base label-text text-gray-100">Password</span>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter password"
+              className="input bg-white-0 glass h-10 text-white"
+              required
+              value={signUpData.password}
+              onChange={(e) =>
+                setSignUpData({ ...signUpData, password: e.target.value })
+              }
+            />
+          </label>
+
+          <label className="label gap-3">
+            <span className="text-base label-text text-gray-100">
+              Confirm Password
+            </span>
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="Enter password confirmation"
+              className="input bg-white-0 glass h-10 text-white"
+              required
+              value={signUpData.confirmPassword}
+              onChange={(e) =>
+                setSignUpData({
+                  ...signUpData,
+                  confirmPassword: e.target.value,
+                })
+              }
+            />
+          </label>
+
           <GenderCheckbox
             onChange={handleChange}
             selectedValue={signUpData.gender}

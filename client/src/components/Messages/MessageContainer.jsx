@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { TiMessages } from "react-icons/ti";
 import { useAuthContext } from "../../context/auth.context";
-import useConversationStore from "../../stores/conversation.store";
 import MessageInput from "./MessageInput";
 import Messages from "./Messages";
 
 const MessageContainer = () => {
-  const { selectedConversation } = useConversationStore();
-  const noChatSelected = selectedConversation === null;
+  const storedSession = JSON.parse(sessionStorage.getItem("active-chat"));
+  // const { selectedConversation } = useConversationStore();
+  const noChatSelected = !storedSession?._id;
   const [typedMessage, setTypedMessage] = useState([]);
   const sendMessage = (dataEvent) => {
     setTypedMessage(dataEvent);
   };
 
   return (
-    <div className="md:min-w-[450px] h-full w-[1000px] flex-1">
+    <div className="w-full tablet:w-[1000px] flex-1">
       {noChatSelected ? (
         <NoChatSelected />
       ) : (
@@ -24,7 +24,7 @@ const MessageContainer = () => {
             className="bg-slate-400 px-4 py-2 mb-2 sticky top-0"
           >
             <span className="label-text text-gray-50">
-              {selectedConversation.fullName}
+              to: {storedSession.fullName}
             </span>
           </div>
 

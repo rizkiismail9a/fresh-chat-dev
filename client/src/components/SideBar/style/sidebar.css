@@ -1,7 +1,14 @@
-.collapse {
-  /* Don't use display none, the transition won't work */
-  width: 0 !important;
-  opacity: 0;
-  transform: translateX(-100px) !important;
-  transition: all 4s ease-in;
+@media screen and (min-width: 768px) {
+  .collapse {
+    /* Don't use display none, the transition won't work */
+    width: 0 !important;
+    opacity: 0;
+    transform: translateX(-100px) !important;
+    transition: all 4s ease-in;
+  }
+}
+@media screen and (max-width: 767px) {
+  #chats {
+    height: calc(100vh - 90px) !important;
+  }
 }
