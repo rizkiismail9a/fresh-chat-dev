@@ -33,6 +33,12 @@
   scrollbar-arrow-color: green;
 }
 
+html,
+body {
+  height: 100%;
+  overflow: auto; /* Pastikan ini disetel ke auto atau hidden */
+}
+
 body {
   /* background-image: url("/bg.jpg");
   background-repeat: no-repeat;
@@ -41,4 +47,9 @@ body {
   background-color: rgb(227, 205, 176);
   /* min-width: 100vw; */
   /* min-height: 90vh; */
+}
+
+input:focus,
+textarea:focus {
+  scroll-margin-top: 100px; /* atau nilai yang sesuai dengan kebutuhan */
 }
