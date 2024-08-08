@@ -7,6 +7,7 @@ import useConversationStore from "../../stores/conversation.store";
 const NavBar = () => {
   const { setShowSidebar, showSidebar } = useConversationStore();
   const { authedUser } = useAuthContext();
+  const imgSrc = authedUser.gender === "male" ? "/boy.webp" : "girl.webp";
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -31,7 +32,7 @@ const NavBar = () => {
             {authedUser.fullName}
           </p>
           <img
-            src="/boy.webp"
+            src={imgSrc}
             alt="profile placeholder"
             className="h-10 w-10 object-cover"
           />

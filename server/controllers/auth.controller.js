@@ -34,6 +34,7 @@ async function login(req, res) {
         fullName: user.fullName,
         username: user.username,
         profileImg: user.profileImg,
+        gender: user.gender,
       },
     });
   } catch (error) {
