@@ -7,6 +7,7 @@ import useUpdateProfileInfo from "../../hooks/useUpdateProfileInfo";
 import GenderCheckbox from "../../pages/SignUp/GenderCheckbox";
 import Dialog from "../Dialog/Dialog";
 import UpdateInput from "./UpdateInput";
+import UpdatePasswordDialog from "./UpdatePasswordDialog";
 
 const UpdateUserDialog = ({ imgSrc, onClose, visibility }) => {
   const { authedUser } = useAuthContext();
@@ -16,6 +17,7 @@ const UpdateUserDialog = ({ imgSrc, onClose, visibility }) => {
   const [showInputGender, setShowInputGender] = useState(false);
   const { updateProfile } = useUpdateProfileInfo();
   const [gender, setGender] = useState(authedUser.gender);
+  const [showChangePass, setShowChangePass] = useState(false);
   const formValidator = {
     required: {
       value: true,
@@ -40,63 +42,75 @@ const UpdateUserDialog = ({ imgSrc, onClose, visibility }) => {
   });
 
   return (
-    <Dialog onClose={onClose} visibility={visibility}>
-      <div className="flex flex-col gap-4">
-        <h2 className="text-white">Profile User</h2>
-        <img
-          src={imgSrc}
-          alt="profile placeholder"
-          className="h-20 w-20 object-cover"
-        />
-        <FormProvider {...methods}>
-          <form
-            className="flex flex-col gap-3"
-            onSubmit={(e) => e.preventDefault()}
-            noValidate
-          >
-            <div className="flex flex-col gap-1">
-              <UpdateInput
-                showInput={showInputName}
-                onOpen={(e) => setShowInputName(e)}
-                label="Full Name"
-                value={authedUser.fullName}
-                inputName="fullName"
-                validation={formValidator}
-              />
-              <UpdateInput
-                showInput={showInputUsername}
-                onOpen={(e) => setShowInputUsername(e)}
-                label="Username"
-                inputName="username"
-                value={authedUser.username}
-                validation={formValidator}
-              />
-              <CheckBoxInput
-                showInput={showInputGender}
-                onOpen={(e) => setShowInputGender(e)}
-                label="Gender"
-                value={authedUser.gender}
-                onSelectGender={(e) => setGender(e)}
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <p className="text-sm text-white cursor-pointer hover:underline">
-                Change Password
-              </p>
-              <button
-                className="btn btn-outline w-20"
-                disabled={
-                  !showInputGender && !showInputName && !showInputUsername
-                }
-                onClick={submitData}
-              >
-                Save
-              </button>
-            </div>
-          </form>
-        </FormProvider>
-      </div>
-    </Dialog>
+    <>
+      <Dialog onClose={onClose} visibility={visibility}>
+        <div className="flex flex-col gap-4 w-[400px]">
+          <h2 className="text-white">Profile User</h2>
+          <img
+            src={imgSrc}
+            alt="profile placeholder"
+            className="h-20 w-20 object-cover"
+          />
+          <FormProvider {...methods}>
+            <form
+              className="flex flex-col gap-3"
+              onSubmit={(e) => e.preventDefault()}
+              noValidate
+            >
+              <div className="flex flex-col gap-1">
+                <UpdateInput
+                  showInput={showInputName}
+                  onOpen={(e) => setShowInputName(e)}
+                  label="Full Name"
+                  placeholder="Input new full name"
+                  value={authedUser.fullName}
+                  inputName="fullName"
+                  validation={formValidator}
+                />
+                <UpdateInput
+                  showInput={showInputUsername}
+                  onOpen={(e) => setShowInputUsername(e)}
+                  label="Username"
+                  placeholder="Input new username"
+                  inputName="username"
+                  value={authedUser.username}
+                  validation={formValidator}
+                />
+                <CheckBoxInput
+                  showInput={showInputGender}
+                  onOpen={(e) => setShowInputGender(e)}
+                  label="Gender"
+                  value={authedUser.gender}
+                  onSelectGender={(e) => setGender(e)}
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <p
+                  onClick={() => setShowChangePass(true)}
+                  className="text-sm text-white cursor-pointer hover:underline"
+                >
+                  Change Password
+                </p>
+                <button
+                  className="btn btn-outline w-20"
+                  disabled={
+                    !showInputGender && !showInputName && !showInputUsername
+                  }
+                  onClick={submitData}
+                >
+                  Save
+                </button>
+              </div>
+            </form>
+          </FormProvider>
+        </div>
+      </Dialog>
+      {/* Place in the bottom, so it will be showed above update dialog */}
+      <UpdatePasswordDialog
+        visibility={showChangePass}
+        handleClose={() => setShowChangePass(false)}
+      />
+    </>
   );
 };
 

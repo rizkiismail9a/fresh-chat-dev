@@ -24,6 +24,20 @@ const AuthenticationServices = {
   updateProfile: (body) => {
     return API().put("/users/edit-user", body);
   },
+
+  changePassword: ({
+    oldPassword,
+    newPassword,
+    confirmNewPassword,
+    userId,
+  }) => {
+    return API().put("/auth/change-password", {
+      oldPassword,
+      newPassword,
+      confirmNewPassword,
+      userId,
+    });
+  },
 };
 
 export default AuthenticationServices;
