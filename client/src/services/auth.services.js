@@ -13,6 +13,17 @@ const AuthenticationServices = {
   refresh: (_id) => {
     return API().post("/auth/refresh", { _id });
   },
+
+  /*
+   * body includes
+   * _id; id authed user, required
+   * fullName; Not required
+   * username; Not required
+   *
+   */
+  updateProfile: (body) => {
+    return API().put("/users/edit-user", body);
+  },
 };
 
 export default AuthenticationServices;

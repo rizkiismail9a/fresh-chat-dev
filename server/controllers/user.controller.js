@@ -84,7 +84,7 @@ async function editUser(req, res) {
     const { username, fullName, userId, gender } = req.body;
     if (!userId)
       return res
-        .send(400)
+        .status(400)
         .json({ status: 400, message: "user id is required" });
 
     const user = await User.findById(userId).exec();
@@ -115,9 +115,17 @@ async function editUser(req, res) {
 
     await user.save();
 
-    return res
-      .status(201)
-      .json({ status: 201, message: "Profile is successfully updated" });
+    return res.status(201).json({
+      status: 201,
+      message: "Profile is successfully updated",
+      data: {
+        _id: user._id,
+        fullName: user.fullName,
+        username: user.username,
+        profileImg: user.profileImg,
+        gender: user.gender,
+      },
+    });
   } catch (error) {
     console.error("error editUser", error);
     return res
