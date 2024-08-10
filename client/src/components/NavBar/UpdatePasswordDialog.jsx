@@ -29,7 +29,7 @@ const UpdatePasswordDialog = ({ handleClose, visibility }) => {
 
   return (
     <Dialog onClose={closeDialog} visibility={visibility} width="900px">
-      <div className="flex flex-col gap-4 w-[600px]">
+      <div className="flex flex-col gap-4 tablet:w-[600px] min-w-[300px]">
         <h2 className="text-white">Change Password</h2>
         <FormProvider {...methods}>
           <form
