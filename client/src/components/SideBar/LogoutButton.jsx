@@ -22,6 +22,7 @@ const LogoutButton = () => {
       setAuthedUser({});
       setMessages([]);
       setSelectedConversation(null);
+      sessionStorage.clear();
       localStorage.clear();
       Cookies.clear();
     } catch (error) {

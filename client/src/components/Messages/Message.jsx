@@ -6,9 +6,12 @@ const Message = ({ message }) => {
   const { authedUser } = useAuthContext();
   const { selectedConversation } = useConversationStore();
   const isFromMe = authedUser._id === message.senderId;
+  const storedSession = selectedConversation
+    ? selectedConversation
+    : JSON.parse(sessionStorage.getItem("active-chat"));
   const profileImg = isFromMe
     ? authedUser.profileImg
-    : selectedConversation.profileImg;
+    : storedSession.profileImg;
 
   return (
     <>

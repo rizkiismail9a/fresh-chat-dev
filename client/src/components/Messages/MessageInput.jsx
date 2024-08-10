@@ -28,7 +28,7 @@ const MessageInput = ({ onInputChange }) => {
           id="input-message"
           placeholder="Send a message"
           value={typedMessage}
-          className="border text-sm rounded-lg focus:outline-none block w-full p-2.5 bg-gray-700 border-gray-600 text-white"
+          className="border text-sm rounded-lg focus:outline-none block w-full p-2.5 glass text-gray-900"
           onChange={(e) => setTypedMessage(e.target.value)}
           autoComplete="off"
         />
@@ -36,7 +36,11 @@ const MessageInput = ({ onInputChange }) => {
           type="submit"
           className="absolute inset-y-0 end-0 flex items-center pe-3"
         >
-          {loading ? <div className="loading"></div> : <BiSend />}
+          {loading ? (
+            <div className="loading"></div>
+          ) : (
+            <BiSend className="text-white" />
+          )}
         </button>
       </div>
     </form>

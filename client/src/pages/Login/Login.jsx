@@ -98,7 +98,7 @@ const Login = () => {
           <div>
             <Link
               to="/signup"
-              className="text-xs text-gray-100 hover:underline hover:text-blue-600 mx-auto"
+              className="text-xs text-gray-100 hover:underline mx-auto"
             >
               {"Don't"} have any account? Just sign up
             </Link>

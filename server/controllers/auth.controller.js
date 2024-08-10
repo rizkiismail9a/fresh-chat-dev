@@ -34,6 +34,7 @@ async function login(req, res) {
         fullName: user.fullName,
         username: user.username,
         profileImg: user.profileImg,
+        gender: user.gender,
       },
     });
   } catch (error) {
@@ -137,4 +138,44 @@ async function refreshToken(req, res) {
   }
 }
 
-module.exports = { login, logout, refreshToken, signUp };
+async function changePassword(req, res) {
+  try {
+    const { oldPassword, newPassword, confirmNewPassword, userId } = req.body;
+    if (!oldPassword || !newPassword || !confirmNewPassword || !userId)
+      return res
+        .status(400)
+        .json({ status: 400, message: "Fill all required data" });
+
+    const user = await User.findById(userId).exec();
+
+    const isOldPassCorrect = await bcrypt.compare(oldPassword, user.password);
+
+    if (!isOldPassCorrect)
+      return res
+        .status(400)
+        .json({ status: 400, message: "Invalid old password" });
+
+    if (newPassword !== confirmNewPassword)
+      return res
+        .status(400)
+        .json({ status: 400, message: "Confirm password does not match" });
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    user.password = hashedPassword;
+
+    await user.save();
+
+    return res
+      .status(201)
+      .json({ status: 201, message: "Password is successfully updated" });
+  } catch (error) {
+    console.error("error change password", error);
+    return res
+      .status(500)
+      .json({ status: 500, message: "Internal server error" });
+  }
+}
+
+module.exports = { login, logout, refreshToken, signUp, changePassword };
