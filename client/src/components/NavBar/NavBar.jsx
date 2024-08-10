@@ -90,8 +90,7 @@ const UpdateUserDialog = ({ imgSrc, onClose, visibility }) => {
 
       return data;
     };
-    console.log(checkData(dataFrom));
-    updateProfile({ ...dataFrom, userId: authedUser._id, gender });
+    updateProfile(checkData({ ...dataFrom, userId: authedUser._id, gender }));
   });
 
   return (

@@ -1,10 +1,10 @@
-import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../context/auth.context";
 import AuthenticationServices from "../services/auth.services";
+import useConversationStore from "../stores/conversation.store";
 
 const useUpdateProfileInfo = () => {
-  const [loading, setLoading] = useState(false);
+  const { setLoading } = useConversationStore();
   const { setAuthedUser, authedUser } = useAuthContext();
   const updateProfile = async (body) => {
     try {
@@ -41,7 +41,7 @@ const useUpdateProfileInfo = () => {
     }
   };
 
-  return { loading, updateProfile };
+  return { updateProfile };
 };
 
 export default useUpdateProfileInfo;
