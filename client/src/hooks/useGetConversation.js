@@ -21,6 +21,11 @@ const useGetConversations = (search = "") => {
         });
 
         setConversations(data.data.users);
+        // Store in sessionStorage, too
+        sessionStorage.setItem(
+          "conversations",
+          JSON.stringify(data.data.users)
+        );
       } catch (error) {
         console.error(error);
         toast.error("Failed to get conversation list");

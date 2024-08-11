@@ -16,6 +16,14 @@ const conversationSchema = new Schema(
         default: [],
       },
     ],
+    isRead: {
+      type: Boolean,
+      required: true,
+    },
+    lastSender: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" } }
 );

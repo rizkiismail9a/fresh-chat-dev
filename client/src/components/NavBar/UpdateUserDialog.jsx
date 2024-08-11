@@ -44,7 +44,7 @@ const UpdateUserDialog = ({ imgSrc, onClose, visibility }) => {
   return (
     <>
       <Dialog onClose={onClose} visibility={visibility}>
-        <div className="flex flex-col gap-4 w-[400px]">
+        <div className="flex flex-col gap-4 tablet:w-[400px] min-w-[300px]">
           <h2 className="text-white">Profile User</h2>
           <img
             src={imgSrc}

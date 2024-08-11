@@ -30,16 +30,37 @@ async function sendMessage(req, res) {
     }
 
     // If the conversation is not available, create new one and tell the reciever
+    const sender = await User.findById(senderId)
+      .select("-createdAd -updatedAt -__v -password")
+      .lean()
+      .exec();
+
     if (!conversation) {
-      const sender = await User.findById(senderId);
       conversation = await Conversation.create({
         participants:
           receiverId === senderId ? [receiverId] : [receiverId, senderId],
+        isRead: false, //Set the isRead into false
+        lastSender: senderId,
       });
-      socket
-        .to(recieverSokcetId)
-        .emit("newConversation", { status: 200, data: { users: sender } });
+    } else {
+      /*
+       * If there is a conversation, just set the isRead into false
+       */
+      conversation.isRead = false;
+      conversation.lastSender = senderId;
     }
+
+    // Tell reciever that they have a new message
+    socket.to(recieverSokcetId).emit("newConversation", {
+      status: 200,
+      data: {
+        users: {
+          ...sender,
+          isRead: conversation.isRead,
+          lastSender: conversation.lastSender,
+        },
+      },
+    });
 
     // Now, create the message
     const newMessage = new Message({
@@ -48,7 +69,9 @@ async function sendMessage(req, res) {
       message,
     });
 
-    if (newMessage) conversation.messages.push(newMessage);
+    if (newMessage) {
+      conversation.messages.push(newMessage);
+    }
 
     await Promise.all([conversation.save(), newMessage.save()]);
 
@@ -92,9 +115,15 @@ async function getConversation(req, res) {
         data: [],
       });
 
+    /*
+     * everytime user get the conversation, set the isRead indicator to true
+     */
+    if (conversation.lastSender.toString() !== senderId.toString())
+      conversation.isRead = true;
+    await conversation.save();
+
     const startIndex = (Number(page) - 1) * Number(limit);
     const endIndex = Number(page) * Number(limit);
-    // const totalMessages = conversation.messages.length;
 
     const slicedMessages = Array.from(conversation.messages)
       .reverse()

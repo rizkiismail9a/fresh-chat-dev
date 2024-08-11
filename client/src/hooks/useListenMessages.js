@@ -20,6 +20,9 @@ import useConversationStore from "../stores/conversation.store.js";
 const useListenMessages = () => {
   const { socket } = useSocketContext();
   const { selectedConversation, setUserScroll } = useConversationStore();
+  const storedConversation = selectedConversation
+    ? selectedConversation
+    : JSON.parse(sessionStorage.getItem("active-chat"));
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -27,7 +30,7 @@ const useListenMessages = () => {
       const newMessages = dataEmit?.data;
       const senderId = dataEmit.senderId;
 
-      if (selectedConversation._id === senderId) {
+      if (storedConversation._id === senderId) {
         setUserScroll(false);
         setMessages([newMessages]);
       }
