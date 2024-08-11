@@ -28,7 +28,7 @@ const MessageInput = ({ onInputChange }) => {
           id="input-message"
           placeholder="Send a message"
           value={typedMessage}
-          className="border text-sm rounded-lg focus:outline-none block w-full p-2.5 glass text-gray-900"
+          className="border text-sm rounded-lg focus:outline-none placeholder-white block w-full p-2.5 glass text-gray-50"
           onChange={(e) => setTypedMessage(e.target.value)}
           autoComplete="off"
         />
