@@ -13,9 +13,15 @@ const useListenConversations = () => {
     socket?.on("newConversation", (dataEmit) => {
       const newConversation = dataEmit?.data?.users;
 
+      console.log(dataEmit.data.users);
+
       if (newConversation) {
         if (conversations && conversations.length) {
-          setConversations([...conversations, newConversation]);
+          const filtered = conversations.filter(
+            (item) => item._id !== newConversation._id
+          );
+
+          setConversations([newConversation, ...filtered]);
         } else {
           setConversations([newConversation]);
         }

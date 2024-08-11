@@ -23,14 +23,21 @@ async function getUserWithChat(req, res) {
     const loggedUserId = req.userId;
     const search = req.query.search;
 
+    /*
+     * lean is a javascript method, that makes the object mongoose lighter
+     */
     const conversations = await Conversation.find({
       participants: { $in: [loggedUserId] },
-    }).populate("participants");
+    })
+      .lean()
+      .populate("participants", "_id fullName username gender profileImg");
 
     if (search) {
       const users = await User.find({
         fullName: { $regex: new RegExp(search, "i") },
-      });
+      })
+        .lean()
+        .exec();
 
       const userArr = Array.from(users);
 
@@ -49,7 +56,11 @@ async function getUserWithChat(req, res) {
       conversations.forEach((con) => {
         con.participants.forEach((user) => {
           if (user._id.toString() !== loggedUserId) {
-            users.add(user);
+            users.add({
+              ...user,
+              isRead: con.isRead,
+              lastSender: con.lastSender,
+            });
           }
         });
       });

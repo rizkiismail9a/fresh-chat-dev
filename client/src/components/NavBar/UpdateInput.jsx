@@ -48,10 +48,10 @@ const UpdateInput = ({
           />
         )}
         {showInput && (
-          <label className="label gap-2 flex-1">
+          <label htmlFor={inputType} className="label gap-2 flex-1">
             <input
               type={inputType ? inputType : "text"}
-              id="username"
+              id={inputName}
               autoComplete="off"
               defaultValue={value}
               placeholder={placeholder}

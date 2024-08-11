@@ -1,10 +1,13 @@
+import { LuDot } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/auth.context";
 import { useSocketContext } from "../../context/socket.context";
 import useResize from "../../hooks/useResize";
 import useConversationStore from "../../stores/conversation.store";
 
 const Conversation = ({ conversation, isLastIndex }) => {
   const storedSession = JSON.parse(sessionStorage.getItem("active-chat"));
+  const { authedUser } = useAuthContext();
   const {
     selectedConversation,
     setSelectedConversation,
@@ -49,8 +52,13 @@ const Conversation = ({ conversation, isLastIndex }) => {
             <img src={conversation.profileImg} alt={conversation.fullName} />
           </div>
         </div>
-        <div className="text-gray-100 text-sm leading-normal">
+        <div className="text-gray-100 flex items-center justify-between text-sm leading-normal w-full">
           <span>{conversation.fullName}</span>
+          {/* Should be false, not undefined or null */}
+          {conversation?.isRead === false &&
+            conversation?.lastSender?.toString() !== authedUser?._id && (
+              <LuDot className="text-[2.3rem] text-orange-500" />
+            )}
         </div>
       </button>
       {!isLastIndex && <div className="divider h-1 my-0 py-0" />}
