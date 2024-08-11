@@ -9,7 +9,8 @@ import useConversationStore from "../stores/conversation.store";
  *
  */
 const useGetConversations = (search = "") => {
-  const { conversations, setConversations } = useConversationStore();
+  const { selectedConversation, conversations, setConversations } =
+    useConversationStore();
   const { setLoading } = useConversationStore();
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const useGetConversations = (search = "") => {
     };
 
     getConversations();
-  }, [search, setLoading, setConversations]);
+  }, [search, setLoading, setConversations, selectedConversation]);
 
   return { conversations };
 };
