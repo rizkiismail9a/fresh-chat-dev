@@ -76,7 +76,7 @@ const Login = () => {
               id="username"
               autoComplete="off"
               placeholder="Enter username"
-              className="input bg-white-0 glass h-10 text-white w-full"
+              className="input bg-white-0 glass h-10 text-white w-full placeholder-white"
               required
               ref={username}
             />
@@ -89,7 +89,7 @@ const Login = () => {
               id="password"
               autoComplete="off"
               placeholder="Enter password"
-              className="input bg-white-0 glass h-10 text-white w-full"
+              className="input placeholder-white bg-white-0 glass h-10 text-white w-full"
               required
               ref={password}
             />

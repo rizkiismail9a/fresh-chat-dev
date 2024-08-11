@@ -12,7 +12,7 @@ const SearchInput = ({ onChange }) => {
   return (
     <form onSubmit={submit} className="flex gap-2 items-center">
       <input
-        className="input rounded-md bg-transparent glass w-full text-gray-50"
+        className="input rounded-md bg-transparent glass w-full text-gray-50 placeholder-white"
         type="text"
         placeholder="Find someone"
         ref={searchQuery}

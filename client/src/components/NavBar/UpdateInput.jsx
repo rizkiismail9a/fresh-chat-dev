@@ -55,7 +55,7 @@ const UpdateInput = ({
               autoComplete="off"
               defaultValue={value}
               placeholder={placeholder}
-              className="input bg-white-0 glass h-8 text-white w-full"
+              className="input bg-white-0 glass h-8 text-white w-full placeholder-white"
               {...register(inputName, validation)}
             />
           </label>

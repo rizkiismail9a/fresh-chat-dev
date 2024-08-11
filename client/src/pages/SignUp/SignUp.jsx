@@ -71,7 +71,7 @@ const SignUp = () => {
               type="text"
               id="fullName"
               placeholder="Enter fullname"
-              className="input bg-white-0 glass h-10 text-white w-full"
+              className="input bg-white-0 placeholder-white glass h-10 text-white w-full"
               required
               value={signUpData.fullName}
               autoComplete="off"
@@ -90,7 +90,7 @@ const SignUp = () => {
               id="username"
               autoComplete="off"
               placeholder="Enter username"
-              className="input bg-white-0 glass h-10 text-white w-full"
+              className="input placeholder-white bg-white-0 glass h-10 text-white w-full"
               required
               value={signUpData.username}
               onChange={(e) =>
@@ -107,7 +107,7 @@ const SignUp = () => {
               type="password"
               id="password"
               placeholder="Enter password"
-              className="input bg-white-0 glass h-10 text-white w-full"
+              className="input placeholder-white bg-white-0 glass h-10 text-white w-full"
               required
               value={signUpData.password}
               onChange={(e) =>
@@ -124,7 +124,7 @@ const SignUp = () => {
               type="password"
               id="confirmPassword"
               placeholder="Enter password confirmation"
-              className="input bg-white-0 glass h-10 text-white w-full"
+              className="input placeholder-white bg-white-0 glass h-10 text-white w-full"
               required
               value={signUpData.confirmPassword}
               onChange={(e) =>
